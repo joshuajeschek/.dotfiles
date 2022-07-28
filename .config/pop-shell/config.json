@@ -1,0 +1,40 @@
+{
+  "float": [
+    {
+      "class": "pop-shell-example",
+      "title": "pop-shell-example"
+    },
+    {
+      "class": "xdg-desktop-portal-gnome"
+    },
+    {
+      "class": "Gnome-control-center"
+    },
+    {
+      "class": "gnome-extensions-app"
+    },
+    {
+      "class": "Dconf-editor"
+    },
+    {
+      "class": "Evolution-alarm-notify"
+    },
+    {
+      "class": "SWT"
+    },
+    {
+      "class": "org.gnome.Shell.Extensions"
+    },
+    {
+      "class": "Nvidia-settings"
+    },
+    {
+      "class": "firefox",
+      "title": "Library"
+    }
+  ],
+  "skiptaskbarhidden": [],
+  "log_on_focus": false,
+  "move_pointer_on_switch": false,
+  "default_pointer_position": "TOP_LEFT"
+}

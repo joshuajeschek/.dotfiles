@@ -1,0 +1,39 @@
+[calendars]
+
+[[private]]
+path = /home/josh/.calendars/joshua.jeschek@gmail.com
+type = calendar
+color = dark blue
+
+[[hrd]]
+path = /home/josh/.calendars/612sin4be36cjegmu13naop4oo@group.calendar.google.com
+type = calendar
+color = light cyan
+
+[[tuc]]
+path = /home/josh/.calendars/aov509i91k5ckoqq5tqpqft4ko@group.calendar.google.com
+type = calendar
+color = light green
+
+[[tuc-deadlines]]
+path = /home/josh/.calendars/np4khbmat7c6jmoq0tfdra71e0@group.calendar.google.com
+type = calendar
+color = light red
+
+[[sport]]
+path = /home/josh/.calendars/f27vof1vui9n89qipe25gbfho8@group.calendar.google.com
+type = calendar
+color = dark magenta
+
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
+weeknumbers = left
+
+[default]
+default_calendar = private
+
