@@ -100,17 +100,9 @@ fi
 # enable autojump
 source /usr/share/autojump/autojump.sh
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 alias h=history
 alias please=sudo
+alias cfg="dotbare fedit"
 alias zshcfg="nvim ~/.zshrc && source ~/.zshrc"
 alias nvimcfg="nvim ~/.config/nvim/init.vim"
 alias kittycfg="nvim ~/.config/kitty/kitty.conf"
@@ -130,31 +122,6 @@ hash -d Videos=/media/josh/main/Videos
 # PROMPT='%{%K{black}%}%{%F{default}%}%(!.%{%F{yellow}%}.)🌈'$PROMPT
 # RPROMPT="[%D{%f/%m/%y} | %D{%L:%M:%S}]"
 
-# ntfy alias setup
-declare -a LAST_COMMANDS
-LAST_COMMANDS=(
-	"c1"
-	"c2"
-	"c3"
-	"c4"
-	"c5"
-	)
-TRAPDEBUG() {
-	LAST_COMMANDS[5]=$LAST_COMMANDS[4]
-	LAST_COMMANDS[4]=$LAST_COMMANDS[3]
-	LAST_COMMANDS[3]=$LAST_COMMANDS[2]
-	LAST_COMMANDS[2]=$LAST_COMMANDS[1]
-	LAST_COMMANDS[1]=$ZSH_DEBUG_CMD
-}
-ny() {
-	if [[ $? -eq 0 ]]
-	then
-		ntfy send "SUCCESS: $LAST_COMMANDS[5]"
-	else
-		ntfy send "FAIL($?): $LAST_COMMANDS[5]"
-	fi
-}
-
 export PATH="$HOME/.poetry/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
 export VISUAL="/usr/bin/nvim"
@@ -163,11 +130,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-
-eval $(thefuck --alias)
-
-autoload -U compinit && compinit
-_dotbare_completion_cmd
-source $ZSH/oh-my-zsh.sh
-_dotbare_completion_cmd
 
