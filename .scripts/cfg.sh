@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/zsh
 dotbare fedit
 dotbare add -u
 dt=$(date '+%d/%m/%Y %H:%M:%S')
