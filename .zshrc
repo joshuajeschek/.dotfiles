@@ -102,7 +102,7 @@ source /usr/share/autojump/autojump.sh
 
 alias h=history
 alias please=sudo
-alias cfg="dotbare fedit"
+alias cfg="~/.scripts/cfg.sh"
 alias zshcfg="nvim ~/.zshrc && source ~/.zshrc"
 alias nvimcfg="nvim ~/.config/nvim/init.vim"
 alias kittycfg="nvim ~/.config/kitty/kitty.conf"
