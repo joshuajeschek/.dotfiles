@@ -4,6 +4,5 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualText": true,
   "diagnostic.virtualTextCurrentLineOnly": false,
-  "diagnostic.virtualTextWinCol": 80,
   "diagnostic.virtualTextPrefix": "■ "
 }
