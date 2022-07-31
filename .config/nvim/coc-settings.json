@@ -1,4 +1,9 @@
 {
   "Lua.telemetry.enable": true,
-  "diagnostic.virtualTextCurrentLineOnly": false
+  "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
+  "diagnostic.virtualTextWinCol": 80,
+  "diagnostic.virtualTextPrefix": "■ "
 }
