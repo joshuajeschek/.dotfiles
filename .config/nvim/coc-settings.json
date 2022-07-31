@@ -1,3 +1,4 @@
 {
-  "Lua.telemetry.enable": true
+  "Lua.telemetry.enable": true,
+  "diagnostic.virtualTextCurrentLineOnly": false
 }
