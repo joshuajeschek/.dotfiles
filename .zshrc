@@ -110,7 +110,7 @@ alias tt="taskwarrior-tui"
 alias kk="khal interactive"
 alias den="code ~/dendron/dendron.code-workspace"
 alias backup-config="mackup backup && ~/dotfiles/sync.sh"
-alias save-command="source ~/scripts/save-command.sh"
+alias save-command="source ~/.scripts/save-command.sh"
 alias zshfetch="neofetch; zsh"
 alias s="kitty +kitten ssh"
 
