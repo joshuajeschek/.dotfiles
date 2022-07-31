@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local M = {}
 
 local function bind(op, outer_opts)

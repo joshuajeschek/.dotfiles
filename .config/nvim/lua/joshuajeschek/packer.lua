@@ -1,11 +1,16 @@
 return require("packer").startup(function()
     use("wbthomason/packer.nvim")
     use("neoclide/coc.nvim", { branch = "master" })
+    use("WhoIsSethDaniel/toggle-lsp-diagnostics.nvim")
     use("sbdchd/neoformat")
     use("vim-airline/vim-airline")
     use("wakatime/vim-wakatime")
     use("jiangmiao/auto-pairs")
+    use("tpope/vim-surround")
     use("tpope/vim-commentary")
+    use("tpope/vim-fugitive")
+    use("airblade/vim-gitgutter")
+    use("lukas-reineke/virt-column.nvim")
 
     -- telescope
     use("nvim-telescope/telescope.nvim")

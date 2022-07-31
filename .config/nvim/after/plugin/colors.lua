@@ -8,3 +8,8 @@ vim.g.gruvbox_colors = { bg0 = "#000000" }
 
 vim.cmd("colorscheme " .. vim.g.joshuajeschek_colorscheme)
 
+vim.api.nvim_set_hl(0, "ColorColumn", {
+  ctermbg = 0,
+  bg = "#000000",
+})
+
