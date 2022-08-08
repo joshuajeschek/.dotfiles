@@ -6,6 +6,8 @@ local inoremap = Remap.inoremap
 nnoremap("<C-p>", function()
   require('telescope.builtin').find_files()
 end)
+nnoremap("<C-A-p>", ":Telescope<CR>")
+
 
 -- undo/ redo
 nnoremap("<C-z>", "u")

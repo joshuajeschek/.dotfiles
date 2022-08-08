@@ -1,6 +1,6 @@
 return require("packer").startup(function()
     use("wbthomason/packer.nvim")
-    use("neoclide/coc.nvim", { branch = "master" })
+    use("neoclide/coc.nvim", { branch = "master", run = "yarn install" })
     use("WhoIsSethDaniel/toggle-lsp-diagnostics.nvim")
     use("sbdchd/neoformat")
     use("vim-airline/vim-airline")

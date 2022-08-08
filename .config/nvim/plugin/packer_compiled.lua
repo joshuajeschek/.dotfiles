@@ -74,10 +74,10 @@ _G.packer_plugins = {
     path = "/home/josh/.local/share/nvim/site/pack/packer/start/auto-pairs",
     url = "https://github.com/jiangmiao/auto-pairs"
   },
-  ["coc.nvim"] = {
+  ["git-blame.vim"] = {
     loaded = true,
-    path = "/home/josh/.local/share/nvim/site/pack/packer/start/coc.nvim",
-    url = "https://github.com/neoclide/coc.nvim"
+    path = "/home/josh/.local/share/nvim/site/pack/packer/start/git-blame.vim",
+    url = "https://github.com/zivyangll/git-blame.vim"
   },
   gruvbox = {
     loaded = true,
