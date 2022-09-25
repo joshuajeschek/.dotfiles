@@ -48,3 +48,6 @@ vim.g.netrw_browse_split = 4
 vim.g.netrw_altv = 1
 vim.g.netrw_winsize = 25
 
+-- trailing whitespaces
+-- vim.fn.matchadd('errorMsg', [[\s\+$]])
+

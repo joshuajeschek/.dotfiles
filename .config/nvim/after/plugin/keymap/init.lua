@@ -7,6 +7,7 @@ nnoremap("<C-p>", function()
   require('telescope.builtin').find_files()
 end)
 nnoremap("<C-A-p>", ":Telescope<CR>")
+nnoremap("<space>fb", ":Telescope file_browser<CR>")
 
 
 -- undo/ redo
@@ -18,8 +19,4 @@ inoremap("<C-S-z>", "<C-o><C-r>")
 -- Neoformat
 nnoremap("<C-S-G>", ":Neoformat<CR>")
 inoremap("<C-S-G>", "<C-o>:Neoformat<CR>")
-
--- Commenting
-nnoremap("<C-#>", ":Commentary<CR>")
-inoremap("<C-#>", "<C-o>:Commentary<CR>")
 
