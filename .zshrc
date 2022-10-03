@@ -112,6 +112,8 @@ alias backup-config="mackup backup && ~/dotfiles/sync.sh"
 alias save-command="source ~/.scripts/save-command.sh"
 alias zshfetch="neofetch; zsh"
 alias s="kitty +kitten ssh"
+alias hg="history | grep"
+alias sb="sudo ddcutil -d 1 setvcp 10"
 
 hash -d Projects=~/Projects
 hash -d Documents=/media/josh/main/Documents
