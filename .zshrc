@@ -82,6 +82,7 @@ source $ZSH/oh-my-zsh.sh
 if [ -d "$HOME/.local/bin" ] ; then
   PATH="$PATH:$HOME/.local/bin"
   PATH="$PATH:$HOME/.nvm"
+  PATH="$PATH:$HOME/.yarn/bin"
 fi
 
 # You may need to manually set your language environment
@@ -133,4 +134,20 @@ export NVM_DIR="$HOME/.nvm"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 eval $(thefuck --alias)
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/josh/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/josh/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/josh/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/josh/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
