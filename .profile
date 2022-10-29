@@ -33,4 +33,4 @@ export PATH="$HOME/.poetry/bin:$PATH"
 . "$HOME/.cargo/env"
 
 setxkbmap -option caps:escape
-
+oneko -tofocus &
