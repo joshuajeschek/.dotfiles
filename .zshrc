@@ -71,6 +71,8 @@ ZSH_THEME="agnoster"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git dotbare)
+export DOTBARE_DIR="$HOME/.dotfiles"
+export DOTBARE_TREE="$HOME"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,7 +101,8 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # enable autojump
-source /usr/share/autojump/autojump.sh
+# [[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
+# source /usr/share/autojump/autojump.sh
 
 alias h=history
 alias please=sudo
@@ -132,9 +135,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-
-eval $(thefuck --alias)
-
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
