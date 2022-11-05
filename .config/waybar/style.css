@@ -1,0 +1,88 @@
+window#waybar {
+    background-color: transparent;
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: CaskaydiaCove Nerd Font Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+  border: none;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* single modules */
+#clock,
+#workspaces,
+#custom-spotify,
+#window {
+    border-radius: 10px;
+    background: rgba(56, 60, 74, 0.7);
+    color: white;
+    opacity: 1;
+    padding: 0px 10px;
+}
+
+#workspaces {
+    padding: 0px;
+    font-family: thewitcher, Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+    background: rgba(56, 60, 74, 0.5);
+}
+
+#workspaces button {
+    padding: 2px 5px 0px;
+    color: #ffffff;
+    margin: 2px;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0); /* fixes spacing */
+}
+
+#workspaces button:nth-child(1) {
+  color: #448488;
+}
+#workspaces button:nth-child(2) {
+  color: #cc231c;
+}
+#workspaces button:nth-child(3) {
+  color: #b16185;
+}
+#workspaces button:nth-child(4) {
+  color: #d79920;
+}
+#workspaces button:nth-child(5) {
+  color: #989719;
+}
+
+
+#workspaces button.active {
+    box-shadow: 0 0 0 2px #689d69;
+    background: rgba(56, 60, 74, 1);
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+/* status modules */
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio {
+    background: rgba(56, 60, 74, 0.5);
+    color: white;
+    opacity: 1;
+    margin: 0;
+}
+

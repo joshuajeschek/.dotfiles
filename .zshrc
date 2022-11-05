@@ -9,6 +9,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
+export GTK_THEME="jarc-dark"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -101,7 +102,7 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # enable autojump
-# [[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
+[[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
 # source /usr/share/autojump/autojump.sh
 
 alias h=history
@@ -153,4 +154,4 @@ unset __conda_setup
 
 
 #[ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
-[ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
+# [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
