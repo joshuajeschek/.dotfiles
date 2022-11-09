@@ -39,7 +39,6 @@ fi
 
 alias h=history
 alias please=sudo
-alias sync="source ~/.scripts/sync.sh"
 alias zshcfg="nvim ~/.zshrc && source ~/.zshrc"
 alias kittycfg="nvim ~/.config/kitty/kitty.conf"
 alias tt="taskwarrior-tui"
