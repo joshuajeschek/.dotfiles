@@ -39,6 +39,8 @@ fi
 
 alias h=history
 alias please=sudo
+alias dog=cat
+alias more=less
 alias zshcfg="nvim ~/.zshrc && source ~/.zshrc"
 alias kittycfg="nvim ~/.config/kitty/kitty.conf"
 alias tt="taskwarrior-tui"
@@ -48,6 +50,8 @@ alias backup-config="mackup backup && ~/dotfiles/sync.sh"
 alias save-command="source ~/.scripts/save-command.sh"
 alias zshfetch="neofetch; zsh"
 alias s="kitty +kitten ssh"
+alias c="wl-copy"
+alias v="wl-paste"
 alias hg="history | grep"
 alias sb="sudo ddcutil -d 1 setvcp 10"
 alias SHUTDOWN="shutdown -h now"
@@ -69,21 +73,24 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
+
+export PATH="$HOME/.ghcup/bin:$PATH"
+# export PATH="/opt/anaconda/bin:$PATH"  # commented out by conda initialize
+# [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
+# [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/josh/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/josh/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/josh/opt/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/anaconda/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda/etc/profile.d/conda.sh"
     else
-        export PATH="/home/josh/opt/anaconda3/bin:$PATH"
+        export PATH="/opt/anaconda/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-export PATH="$HOME/.ghcup/bin:$PATH"
-# [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
-# [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
+eval "$(starship init zsh)"
