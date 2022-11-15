@@ -1,12 +1,15 @@
+@define-color grey #3C3836;
+@define-color blue #448488;
+@define-color red #cc231c;
+@define-color purple #b16185;
+@define-color yellow #d79920;
+@define-color green #989719;
+
 window#waybar {
-    background-color: transparent;
-    /* `otf-font-awesome` is required to be installed for icons */
+    /* background-color: rgba(0, 0, 0, 0.3); */
+    background: transparent;
     font-family: CaskaydiaCove Nerd Font Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
-}
-
-window#waybar.hidden {
-    opacity: 0.2;
 }
 
 button {
@@ -21,54 +24,56 @@ button:hover {
 #clock,
 #workspaces,
 #custom-spotify,
+#tray,
 #window {
-    border-radius: 10px;
-    background: rgba(56, 60, 74, 0.7);
+    border-radius: 15px;
+    background: @grey;
     color: white;
     opacity: 1;
     padding: 0px 10px;
+    margin: 0 0.5em 0 0;
 }
 
 #workspaces {
     padding: 0px;
     font-family: thewitcher, Arial, sans-serif;
-    font-size: 20px;
-    border-radius: 10px;
-    background: rgba(56, 60, 74, 0.5);
+    font-size: 19px;
+    border-radius: 15px;
+    background: @grey;
 }
 
 #workspaces button {
     padding: 2px 5px 0px;
     color: #ffffff;
     margin: 2px;
-    border-radius: 10px;
+    border-radius: 15px;
     border: 2px solid rgba(0, 0, 0, 0); /* fixes spacing */
 }
 
 #workspaces button:nth-child(1) {
-  color: #448488;
+  color: @blue;
 }
 #workspaces button:nth-child(2) {
-  color: #cc231c;
+  color: @red;
 }
 #workspaces button:nth-child(3) {
-  color: #b16185;
+  color: @purple;
 }
 #workspaces button:nth-child(4) {
-  color: #d79920;
+  color: @yellow;
 }
 #workspaces button:nth-child(5) {
-  color: #989719;
+  color: @green;
 }
 
 
 #workspaces button.active {
-    box-shadow: 0 0 0 2px #689d69;
-    background: rgba(56, 60, 74, 1);
+    box-shadow: 0 0 0 2px white;
+    background: @grey;
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: @red;
 }
 
 /* status modules */
@@ -80,9 +85,56 @@ button:hover {
 #backlight,
 #network,
 #pulseaudio {
-    background: rgba(56, 60, 74, 0.5);
+    background: @grey;
     color: white;
     opacity: 1;
     margin: 0;
 }
-
+label:disabled {
+  color: white;
+  opacity: 1;
+}
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#battery,
+#pulseaudio,
+#network {
+  border-radius: 15px 0 0 15px;
+  padding: 0 0.75em;
+  margin: 0 0 0 0.5em;
+}
+#custom-pulseaudio-icon,
+#custom-network-icon,
+#custom-cpu-icon,
+#custom-memory-icon,
+#custom-temperature-icon,
+#custom-backlight-icon,
+#custom-battery-icon {
+  font-size: 1.25em;
+  padding: 0 0.75em;
+  border-radius: 15px;
+  box-shadow: -6px 0px 0px 2px @grey;
+}
+#custom-cpu-icon {
+  background: @green;
+}
+#custom-memory-icon {
+  background: @green;
+}
+#custom-temperature-icon {
+  background: @green;
+}
+#custom-backlight-icon {
+  background: @purple;
+}
+#custom-battery-icon {
+  background: @purple;
+}
+#custom-network-icon {
+  background: @blue;
+}
+#custom-pulseaudio-icon {
+  background: @blue;
+}

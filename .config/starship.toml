@@ -44,6 +44,9 @@ symbol = " "
 [haskell]
 symbol = ""
 format = '[ ](bg)[$version ](bg:bg)[](fg:lng bg:bg)[$symbol](bg:lng)[](lng)'
+[conda]
+symbol = ""
+format = '[ ](bg)[$environment ](bg:bg)[](fg:lng bg:bg)[$symbol](bg:lng)[](lng)'
 
 [palettes.josh]
 bg = "#3C3836"
