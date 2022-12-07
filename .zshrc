@@ -67,6 +67,7 @@ hash -d Videos=/media/josh/main/Videos
 export PATH="$HOME/.poetry/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
 export VISUAL="/usr/bin/nvim"
+export STARSHIP_LOG="error"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

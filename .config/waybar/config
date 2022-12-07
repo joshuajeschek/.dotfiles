@@ -55,7 +55,9 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%Y-%m-%d}",
+        "format": "{:%H:%M:%S}",
+        "interval": 1
     },
     "cpu": {
         "format": "{usage}%",
@@ -78,6 +80,7 @@
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
+        "bat": "BAT0",
         "states": {
             // "good": 95,
             "warning": 30,
@@ -149,7 +152,7 @@
     "on-click": ""
   },
   "custom/memory-icon": {
-    "format": "",
+    "format": "",
     "tooltip": false,
     "on-click": ""
   },
