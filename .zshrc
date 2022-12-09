@@ -1,4 +1,8 @@
 export ZSH="$HOME/.oh-my-zsh"
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 ZSH_THEME="agnoster"
 export GTK_THEME="jarc-dark"
