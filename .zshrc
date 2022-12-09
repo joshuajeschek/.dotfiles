@@ -5,11 +5,13 @@ SAVEHIST=10000
 setopt appendhistory
 
 ZSH_THEME="agnoster"
-export GTK_THEME="jarc-dark"
+export GTK_THEME="oomox-wal"
+(cat ~/.cache/wal/sequences &)
 
 plugins=(git dotbare)
 export DOTBARE_DIR="$HOME/.dotfiles"
 export DOTBARE_TREE="$HOME"
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 source $ZSH/oh-my-zsh.sh
 

@@ -16,4 +16,6 @@ if [ $(< /sys/class/drm/card0-DP-1/status) = "connected" ] \
   export WLR_DRM_DEVICES=/dev/dri/card0
 fi
 
+wal -R
+
 exec Hyprland
