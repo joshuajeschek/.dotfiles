@@ -1,0 +1,2 @@
+#!/bin/bash
+cp $HOME/.faces/$(ls $HOME/.faces | shuf -n 1) $HOME/.face.icon
