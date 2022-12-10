@@ -74,6 +74,7 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
 export VISUAL="/usr/bin/nvim"
 export STARSHIP_LOG="error"
+export SUDO_PROMPT=$'\a[sudo] please enter your password: '
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

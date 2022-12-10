@@ -1,6 +1,7 @@
 #!/bin/sh
 cd ~
-wal -R
+(wal -R &)
+($HOME/.faces/setface &)
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 export XCURSOR_SIZE=24
