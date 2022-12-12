@@ -5,8 +5,6 @@ SAVEHIST=10000
 setopt appendhistory
 
 ZSH_THEME="agnoster"
-export GTK_THEME="oomox-wal"
-(cat ~/.cache/wal/sequences &)
 
 plugins=(git dotbare)
 export DOTBARE_DIR="$HOME/.dotfiles"
