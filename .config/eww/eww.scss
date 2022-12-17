@@ -1,0 +1,26 @@
+$bg: rgba(#000000, 30%);
+// $bg: red;
+
+
+* {
+  all: unset;
+  background: transparent;
+  font-family: CaskaydiaCove Nerd Font Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+
+}
+
+.bar,
+.volume,
+.brightness {
+  background: $bg;
+  border-radius: 10;
+}
+
+.vb > * {
+  margin: 10;
+  font-size: 18;
+}
+
+.vb-title {
+  font-size: 30;
+}

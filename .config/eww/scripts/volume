@@ -1,0 +1,53 @@
+#!/bin/bash
+
+TIMEOUT=3
+
+get() {
+  echo "{\"value\": $(pamixer --get-volume), \"human\": \"$(pamixer --get-volume-human)\", \"time\": $(date +%s)}"
+}
+
+close() {
+  sleep $TIMEOUT
+  cur=$(tail -1 /tmp/eww/volume)
+  if (($1 >= $(echo $cur | jq '.time'))); then
+    eww close volume
+  fi
+}
+
+down() {
+  eww close brightness
+  eww open volume
+  pamixer -d 3
+  cur=$(get)
+  echo $cur >> /tmp/eww/volume
+  canberra-gtk-play -i audio-volume-change -d "changevolume"
+  close $(echo $cur | jq '.time')
+}
+
+up() {
+  eww close brightness
+  eww open volume
+  pamixer -i 3
+  cur=$(get)
+  echo $cur >> /tmp/eww/volume
+  canberra-gtk-play -i audio-volume-change -d "changevolume"
+  close $(echo $cur | jq '.time')
+}
+
+mute() {
+  eww close brightness
+  eww open volume
+  DEFAULT_SINK=$(pactl info | grep "Default Sink" | cut -d " " -f3)
+  pactl set-sink-mute "$DEFAULT_SINK" toggle
+  cur=$(get)
+  echo $cur >> /tmp/eww/volume
+  canberra-gtk-play -i audio-volume-change -d "changevolume"
+  close $(echo $cur | jq '.time')
+}
+
+case "$1" in
+  get) get;;
+  up) up;;
+  down) down;;
+  mute) mute;;
+esac

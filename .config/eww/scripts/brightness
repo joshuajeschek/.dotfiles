@@ -1,0 +1,40 @@
+#!/bin/bash
+# currently requires brightnessctl-git to work
+
+TIMEOUT=3
+
+get() {
+  v=$(brightnessctl -P g)
+  echo "{\"value\": $v, \"human\": \"$v%\", \"time\": $(date +%s)}"
+}
+
+close() {
+  sleep $TIMEOUT
+  if (($1 >= $(tail -1 /tmp/eww/brightness | jq '.time'))); then
+    eww close brightness
+  fi
+}
+
+down() {
+  eww close volume
+  eww open brightness
+  brightnessctl s 5%-
+  cur=$(get)
+  echo $cur >> /tmp/eww/brightness
+  close $(echo $cur | jq '.time')
+}
+
+up() {
+  eww close volume
+  eww open brightness
+  brightnessctl s 5%+
+  cur=$(get)
+  echo $cur >> /tmp/eww/brightness
+  close $(echo $cur | jq '.time')
+}
+
+case "$1" in
+  get) get;;
+  up) up;;
+  down) down;;
+esac

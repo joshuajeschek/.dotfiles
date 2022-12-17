@@ -1,0 +1,120 @@
+; =======
+;   BAR
+; =======
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :exclusive true
+  :geometry (geometry
+    :x "0%"
+    :y "10px"
+    :width "3420px"
+    :height "35px"
+    :anchor "top center"
+  )
+  (bar)
+)
+
+(defwidget bar []
+  (centerbox
+    (bar_left)
+    (bar_center)
+    (bar_right)
+  )
+)
+
+(defwidget bar_left []
+  (box
+    :halign "start"
+    (label :text "LEFT")
+  )
+)
+
+(defwidget bar_center []
+  (label :text "${time.hour}:${time.min}:${time.sec}"))
+
+(defwidget bar_right []
+  (box
+    :halign "end"
+    (label :text "RIGHT")
+  )
+)
+
+; =======================
+;   VOLUME & BRIGHTNESS
+; =======================
+(defwindow volume
+  :monitor 0
+  :stacking "overlay"
+  :geometry (geometry
+    :x "0%"
+    :y "5%"
+    :width "100px"
+    :height "100px"
+    :anchor "bottom center"
+  )
+  (vb
+    :title { volume.human == "muted" ? "ﱝ"
+           : volume.value >= 30 ? ""
+           : volume.value >= 10 ? ""
+           : volume.value > 0 ? ""
+           : "ﱝ"
+           }
+    :text "${volume.human}"
+    :value "${volume.value}"
+  )
+)
+
+(defwindow brightness
+  :monitor 0
+  :stacking "overlay"
+  :geometry (geometry
+    :x "0%"
+    :y "5%"
+    :width "100px"
+    :height "100px"
+    :anchor "bottom center"
+  )
+  (vb
+    :title { brightness.value >= 75 ? ""
+           : brightness.value >= 50 ? ""
+           : brightness.value >= 25 ? ""
+           : ""
+           }
+    :text "${brightness.human}"
+    :value "${brightness.value}"
+  )
+)
+
+(defwidget vb [?title text value]
+  (overlay
+    :class "vb"
+    (circular-progress
+      :value "${value}"
+      :thickness 3
+      :start-at 25
+    )
+    (box
+      :orientation "vertical"
+      (label :yalign "1" :text "${title}" :class "vb-title" )
+      (label :yalign "0.1" :text "${text}")
+    )
+  )
+)
+
+; ========
+;   VARS
+; ========
+(defpoll time
+  :interval "1s"
+  :initial `date +'{"hour":"%H","min":"%M","sec":"%S"}'`
+  `date +'{"hour":"%H","min":"%M","sec":"%S"}'`
+)
+(deflisten volume
+  :initial `./scripts/volume get`
+  `tail -F /tmp/eww/volume`
+)
+(deflisten brightness
+  :initial `./scripts/volume get`
+  `tail -F /tmp/eww/brightness`
+)
