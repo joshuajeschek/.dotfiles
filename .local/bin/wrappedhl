@@ -1,7 +1,8 @@
 #!/bin/sh
 cd ~
-wal -R &
+# /usr/bin/wal -R &
 export GTK_THEME="oomox-wal"
+$HOME/.local/bin/setface &
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 export XCURSOR_SIZE=24

@@ -1,2 +1,2 @@
 #!/bin/bash
-ln -sf $HOME/.faces/$(ls $HOME/.faces | shuf -n 1) $HOME/.face.icon
+ln -sf /home/josh/.faces/$(ls /home/josh/.faces | shuf -n 1) /home/josh/.face.icon

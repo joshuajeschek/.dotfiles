@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 export ZSH="$HOME/.oh-my-zsh"
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -24,22 +25,7 @@ if [ -d "$HOME/.local/bin" ] ; then
   PATH="$PATH:$HOME/.yarn/bin"
 fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# enable autojump
-[[ -s /etc/profile.d/autojump.zsh ]] && source /etc/profile.d/autojump.zsh
-# source /usr/share/autojump/autojump.sh
+(&>/dev/null wal -R &)
 
 alias h=history
 alias please=sudo
@@ -69,6 +55,7 @@ hash -d Videos=/media/josh/main/Videos
 # RPROMPT="[%D{%f/%m/%y} | %D{%L:%M:%S}]"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.ghcup/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
 export VISUAL="/usr/bin/nvim"
 export STARSHIP_LOG="error"
@@ -80,7 +67,7 @@ export NVM_DIR="$HOME/.nvm"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 
-export PATH="$HOME/.ghcup/bin:$PATH"
+[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 # export PATH="/opt/anaconda/bin:$PATH"  # commented out by conda initialize
 # [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
 # [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
@@ -100,3 +87,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 eval "$(starship init zsh)"
+# zprof
