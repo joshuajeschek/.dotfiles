@@ -1,5 +1,6 @@
 #!/bin/bash
 eww daemon
 mkdir /tmp/eww
+mkdir /tmp/eww/clipboard
 touch /tmp/eww/volume
 touch /tmp/eww/brightness

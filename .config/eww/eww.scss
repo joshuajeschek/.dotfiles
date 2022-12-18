@@ -1,4 +1,5 @@
 $bg: rgba(#000000, 30%);
+$fg: #fff;
 // $bg: red;
 
 
@@ -11,7 +12,8 @@ $bg: rgba(#000000, 30%);
 
 .bar,
 .volume,
-.brightness {
+.brightness,
+.clipboard {
   background: $bg;
   border-radius: 10;
 }
@@ -23,4 +25,29 @@ $bg: rgba(#000000, 30%);
 
 .vb-title {
   font-size: 30;
+}
+
+.cb-item {
+  border: 1px solid rgba($fg, 30%);
+  border-radius: 10;
+  margin: 4;
+  padding: 4;
+}
+
+.cb-empty {
+  color: rgba($fg, 30%);
+}
+
+.cb-event:hover > .cb-item {
+  background: $bg;
+}
+
+.cb-event > .cb-item > .cb-showhide >.cb-show {
+  color: transparent;
+}
+.cb-event:hover > .cb-item > .cb-showhide > .cb-hide {
+  color: transparent;
+}
+.cb-event:hover > .cb-item > .cb-showhide > .cb-show {
+  color: unset;
 }
