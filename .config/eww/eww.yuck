@@ -182,8 +182,6 @@
   :initial `./scripts/volume get`
   `tail -F /tmp/eww/brightness`
 )
-; (deflisten clipboard "(label :text \"nothing in clipboard history\")")
-; (deflisten clipboard "while inotifywait -e close_write --quiet ~/.cache/cliphist/db; do (scripts/clipboard &); done")
 (deflisten clipboard "scripts/clipboard watch")
 
 ; (defwindow debug
