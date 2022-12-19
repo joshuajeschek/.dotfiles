@@ -1,0 +1,6 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" xmlns:ns1="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:ns2="http://www.inkscape.org/namespaces/inkscape" viewBox="0 0 24 24" version="1.1" id="svg45" ns1:docname="brightness.svg" ns2:version="1.2.2 (b0a8486541, 2022-12-01)">
+  <ns0:defs id="defs49" />
+  <ns1:namedview id="namedview47" pagecolor="#505050" bordercolor="#ffffff" borderopacity="1" ns2:showpageshadow="0" ns2:pageopacity="0" ns2:pagecheckerboard="1" ns2:deskcolor="#505050" showgrid="false" showguides="true" ns2:zoom="22.627417" ns2:cx="8.9935144" ns2:cy="16.219262" ns2:window-width="3416" ns2:window-height="1376" ns2:window-x="0" ns2:window-y="0" ns2:window-maximized="1" ns2:current-layer="svg45" />
+  <ns0:path d="M 12,18 C 8.6862915,18 6,15.313708 6,12 6,8.6862915 8.6862915,6 12,6 c 3.313708,0 6,2.6862915 6,6 0,3.313708 -2.686292,6 -6,6 M 20,8.69 V 4 H 15.31 L 12,0.69 8.69,4 H 4 V 8.69 L 0.69,12 4,15.31 V 20 H 8.69 L 12,23.31 15.31,20 H 20 V 15.31 L 23.31,12 Z" id="path43" ns1:nodetypes="cssscccccccccccccccccc" style="fill:#ffffff" />
+  <ns0:circle style="fill:#ffffff;stroke-width:0.209129" id="path357" cx="12" cy="12" r="1.3617264829815237" />
+</ns0:svg>

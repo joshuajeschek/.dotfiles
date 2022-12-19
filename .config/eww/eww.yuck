@@ -82,7 +82,7 @@
         :wrap true
         :limit-width 60
         :text "${content}"
-        :markup "<span allow_breaks=\"true\" wrap=\"PANGO_WRAP_CHAR\">${content}</span>"
+        ; :markup "<span>${content}</span>"
       )
     )
   )
@@ -146,17 +146,24 @@
     :anchor "bottom center"
   )
   (vb
-    :title { brightness.value >= 75 ? ""
-           : brightness.value >= 50 ? ""
-           : brightness.value >= 25 ? ""
-           : ""
-           }
+    :path { brightness.value > 95 ? "assets/brightness-10.svg"
+          : brightness.value > 85 ? "assets/brightness-9.svg"
+          : brightness.value > 75 ? "assets/brightness-8.svg"
+          : brightness.value > 65 ? "assets/brightness-7.svg"
+          : brightness.value > 55 ? "assets/brightness-6.svg"
+          : brightness.value > 45 ? "assets/brightness-5.svg"
+          : brightness.value > 35 ? "assets/brightness-4.svg"
+          : brightness.value > 25 ? "assets/brightness-3.svg"
+          : brightness.value > 15 ? "assets/brightness-2.svg"
+          : brightness.value > 5 ? "assets/brightness-1.svg"
+          : "assets/brightness-0.svg"
+          }
     :text "${brightness.human}"
     :value "${brightness.value}"
   )
 )
 
-(defwidget vb [?title text value]
+(defwidget vb [?title ?path text value]
   (overlay
     :class "vb"
     (circular-progress
@@ -166,7 +173,10 @@
     )
     (box
       :orientation "vertical"
-      (label :yalign "1" :text "${title}" :class "vb-title" )
+      (overlay
+        (label :yalign "1" :text title :class "vb-title" )
+        (image :path path)
+      )
       (label :yalign "0.1" :text "${text}")
     )
   )

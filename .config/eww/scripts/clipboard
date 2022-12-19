@@ -25,7 +25,6 @@ yuckify() {
   fi
   while IFS= read -r item; do
     val="$(cut -d ' ' -f 2- <<< $item)"
-    # echo $val
     cleaned="$(clean $val)"
     id="$(cut -d '.' -f 1 <<< $item)"
     ls "/tmp/eww/clipboard/$id.image" > /dev/null 2>&1

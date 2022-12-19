@@ -25,7 +25,7 @@ if [ -d "$HOME/.local/bin" ] ; then
   PATH="$PATH:$HOME/.yarn/bin"
 fi
 
-(&>/dev/null wal -R &)
+# (&>/dev/null wal -R &)
 
 alias h=history
 alias please=sudo
