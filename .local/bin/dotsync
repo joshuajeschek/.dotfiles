@@ -8,6 +8,7 @@ do
     echo ---$(pwd)---
     git add .
     git commit -m "sync ($DT)"
+    git push
     cd $CWD
 done
 echo ---dotbare---
