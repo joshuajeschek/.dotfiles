@@ -38,7 +38,7 @@ yuckify() {
 store() {
   cliphist store
   id="$(cliphist list | head -1 | cut -d '.' -f 1)"
-  rm "/tmp/eww/clipboard/$id.image" > /dev/null 2&1
+  rm "/tmp/eww/clipboard/$id.image" > /dev/null 2>&1
   case $1 in
     image)
       echo "$id. " | cliphist decode > "/tmp/eww/clipboard/$id.image"
@@ -59,9 +59,18 @@ refresh() {
   cliphist decode <<< "$(cliphist list | head -1 | cut -d '.' -f 1). " | wl-copy
 }
 
+toggle() {
+  if [[ "$(eww windows)" == *"*clipboard"* ]]; then
+    eww close clipboard
+  else
+    eww open clipboard
+  fi
+}
+
 case $1 in
   store) store $2;;
   get) yuckify;;
   watch) watch;;
   reload) refresh;;
+  toggle) toggle;;
 esac

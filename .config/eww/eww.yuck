@@ -182,7 +182,7 @@
   :initial `./scripts/volume get`
   `tail -F /tmp/eww/brightness`
 )
-(deflisten clipboard "scripts/clipboard watch")
+(deflisten clipboard "tail -F /tmp/eww/clipboard/yuck")
 
 ; (defwindow debug
 ;   :monitor 0
