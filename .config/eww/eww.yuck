@@ -77,7 +77,13 @@
   (cb_event :index index
     (box
       :class "cb-item"
-      (label :wrap true :limit-width 60 :text "${content}")
+      (label
+        :class "cb-text"
+        :wrap true
+        :limit-width 60
+        :text "${content}"
+        :markup "<span allow_breaks=\"true\" wrap=\"PANGO_WRAP_CHAR\">${content}</span>"
+      )
     )
   )
 )
@@ -87,8 +93,8 @@
       :class "cb-item"
       (overlay
         :class "cb-showhide"
-        (label :class "cb-hide" :wrap true :limit-width 60 :text "${hidden}")
         (label :class "cb-show" :wrap true :limit-width 60 :text "${content}")
+        (label :class "cb-hide" :wrap true :limit-width 60 :text "${hidden}")
       )
     )
   )
