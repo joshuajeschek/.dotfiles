@@ -1,4 +1,5 @@
-$bg: rgba(#000000, 30%);
+// $bg: rgba(#000000, 30%);
+$bg: rgba(#333, 90%);
 $fg: #fff;
 // $bg: red;
 
@@ -7,15 +8,38 @@ $fg: #fff;
   all: unset;
   background: transparent;
   font-family: CaskaydiaCove Nerd Font Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14;
 
 }
 
-.bar,
 .volume,
 .brightness,
-.clipboard {
+.clipboard,
+.media_preview,
+.media_summary,
+.time {
   background: $bg;
   border-radius: 10;
+  padding: 0 0.5em;
+}
+
+.bar_center > * {
+  margin: 0 1em;
+}
+
+.media_art {
+  background-size: cover;
+  background-position: center;
+  border-radius: 10;
+  margin: 0.5em;
+  padding: 2rem;
+}
+.media_art + .paused {
+  // filter: grayscale(100%);
+  // -gtl-recolor
+}
+.media_preview_text {
+  margin: 0.5em;
 }
 
 .vb > * {

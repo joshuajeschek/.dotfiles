@@ -1,215 +1,33 @@
-; =======
-;   BAR
-; =======
-(defwindow bar
-  :monitor 0
-  :stacking "fg"
-  :exclusive true
-  :geometry (geometry
-    :x "0%"
-    :y "10px"
-    :width "3420px"
-    :height "35px"
-    :anchor "top center"
-  )
-  (bar)
-)
-
-(defwidget bar []
-  (centerbox
-    (bar_left)
-    (bar_center)
-    (bar_right)
-  )
-)
-
-(defwidget bar_left []
-  (box
-    :halign "start"
-    (label :text "LEFT")
-  )
-)
-
-(defwidget bar_center []
-  (label :text "${time.hour}:${time.min}:${time.sec}"))
-
-(defwidget bar_right []
-  (box
-    :halign "end"
-    (label :text "RIGHT")
-  )
-)
-
-
-
-; =====================
-;   CLIPBOARD HISTORY
-; =====================
-(defwindow clipboard
-  :monitor 0
-  :stacking "overlay"
-  :geometry (geometry
-    :x "20px"
-    :y "20px"
-    :width "250px"
-    :height "400px"
-    :anchor "bottom left"
-  )
-  (clipboard)
-)
-(defwidget clipboard []
-  (scroll
-    (literal :content clipboard)
-  )
-)
-(defwidget cb_event [index]
-  (eventbox
-    :class "cb-event"
-    :onclick "echo \"${index}. \" | cliphist decode | wl-copy && eww close clipboard"
-    :onrightclick "echo \"${index}. \" | cliphist delete; scripts/clipboard reload"
-    (children)
-  )
-)
-(defwidget cb_empty []
-  (label :vexpand true :class "cb-empty" :wrap true :text "¯\\\\_(ツ)_/¯")
-)
-(defwidget cb_text [content index]
-  (cb_event :index index
-    (box
-      :class "cb-item"
-      (label
-        :class "cb-text"
-        :wrap true
-        :limit-width 60
-        :text "${content}"
-        ; :markup "<span>${content}</span>"
-      )
-    )
-  )
-)
-(defwidget cb_password [content index hidden]
-  (cb_event :index index
-    (box
-      :class "cb-item"
-      (overlay
-        :class "cb-showhide"
-        (label :class "cb-show" :wrap true :limit-width 60 :text "${content}")
-        (label :class "cb-hide" :wrap true :limit-width 60 :text "${hidden}")
-      )
-    )
-  )
-)
-(defwidget cb_image [path index]
-  (cb_event :index index
-    (box
-      :class "cb-item"
-      (image :path "${path}" :image-height "60")
-    )
-  )
-)
-
-; =======================
-;   VOLUME & BRIGHTNESS
-; =======================
-(defwindow volume
-  :monitor 0
-  :stacking "overlay"
-  :wm-ignore true
-  :geometry (geometry
-    :x "0%"
-    :y "5%"
-    :width "100px"
-    :height "100px"
-    :anchor "bottom center"
-  )
-  (vb
-    :title { volume.human == "muted" ? "ﱝ"
-           : volume.value >= 30 ? ""
-           : volume.value >= 10 ? ""
-           : volume.value > 0 ? ""
-           : "ﱝ"
-           }
-    :text "${volume.human}"
-    :value "${volume.value}"
-  )
-)
-
-(defwindow brightness
-  :monitor 0
-  :stacking "overlay"
-  :wm-ignore true
-  :geometry (geometry
-    :x "0%"
-    :y "5%"
-    :width "100px"
-    :height "100px"
-    :anchor "bottom center"
-  )
-  (vb
-    :path { brightness.value > 95 ? "assets/brightness-10.svg"
-          : brightness.value > 85 ? "assets/brightness-9.svg"
-          : brightness.value > 75 ? "assets/brightness-8.svg"
-          : brightness.value > 65 ? "assets/brightness-7.svg"
-          : brightness.value > 55 ? "assets/brightness-6.svg"
-          : brightness.value > 45 ? "assets/brightness-5.svg"
-          : brightness.value > 35 ? "assets/brightness-4.svg"
-          : brightness.value > 25 ? "assets/brightness-3.svg"
-          : brightness.value > 15 ? "assets/brightness-2.svg"
-          : brightness.value > 5 ? "assets/brightness-1.svg"
-          : "assets/brightness-0.svg"
-          }
-    :text "${brightness.human}"
-    :value "${brightness.value}"
-  )
-)
-
-(defwidget vb [?title ?path text value]
-  (overlay
-    :class "vb"
-    (circular-progress
-      :value "${value}"
-      :thickness 3
-      :start-at 25
-    )
-    (box
-      :orientation "vertical"
-      (overlay
-        (label :yalign "1" :text title :class "vb-title" )
-        (image :path path)
-      )
-      (label :yalign "0.1" :text "${text}")
-    )
-  )
-)
-
-; ========
-;   VARS
-; ========
+(include 'bar.yuck')
+(include 'clipboard.yuck')
+(include 'vb.yuck') ; volume and brightness control
+(include 'media.yuck')
+; ===============
+;   GLOBAL VARS
+; ===============
 (defpoll time
   :interval "1s"
   :initial `date +'{"hour":"%H","min":"%M","sec":"%S"}'`
   `date +'{"hour":"%H","min":"%M","sec":"%S"}'`
 )
-(deflisten volume
-  :initial `./scripts/volume get`
-  `tail -F /tmp/eww/volume`
+; ================
+;   DEBUG WINDOW
+; ================
+(defwindow debug
+  :monitor 0
+  :stacking "overlay"
+  :wm-ignore true
+  :geometry (geometry
+    :x "0%"
+    :y "5%"
+    :width "100px"
+    :height "50px"
+    :anchor "bottom center"
+  )
+  (box
+    :orientation "h" :valign "left" :width 100
+    (label :wrap true :xalign 0 :text pdebug)
+  )
 )
-(deflisten brightness
-  :initial `./scripts/volume get`
-  `tail -F /tmp/eww/brightness`
-)
-(deflisten clipboard "tail -F /tmp/eww/clipboard/yuck")
-
-; (defwindow debug
-;   :monitor 0
-;   :stacking "overlay"
-;   :wm-ignore true
-;   :geometry (geometry
-;     :x "0%"
-;     :y "0%"
-;     :width "500px"
-;     :height "100px"
-;     :anchor "top right"
-;   )
-;   (label :text clipboard)
-; )
+(defvar debug "HELLO THERE")
+(deflisten pdebug "date >> log")

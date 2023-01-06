@@ -1,7 +1,9 @@
 #!/bin/bash
-eww daemon
 mkdir /tmp/eww
 mkdir /tmp/eww/clipboard
+mkdir /tmp/eww/media
+touch /tmp/eww/media/sock
 touch /tmp/eww/volume
 touch /tmp/eww/brightness
 (~/.config/eww/scripts/clipboard watch > /tmp/eww/clipboard/yuck) &
+eww daemon
