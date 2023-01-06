@@ -1,0 +1,73 @@
+(deflisten volume :initial './scripts/volume get' 'tail -F /tmp/eww/volume')
+(deflisten brightness :initial './scripts/brightness get' 'tail -F /tmp/eww/brightness')
+
+(defwindow volume
+  :monitor 0
+  :stacking "overlay"
+  :wm-ignore true
+  :geometry (geometry
+    :x "0%"
+    :y "5%"
+    :width "100px"
+    :height "100px"
+    :anchor "bottom center"
+  )
+  (vb
+    :title { volume.human == "muted" ? "ﱝ"
+           : volume.value >= 30 ? ""
+           : volume.value >= 10 ? ""
+           : volume.value > 0 ? ""
+           : "ﱝ"
+           }
+    :text "${volume.human}"
+    :value "${volume.value}"
+  )
+)
+
+(defwindow brightness
+  :monitor 0
+  :stacking "overlay"
+  :wm-ignore true
+  :geometry (geometry
+    :x "0%"
+    :y "5%"
+    :width "100px"
+    :height "100px"
+    :anchor "bottom center"
+  )
+  (vb
+    :path { brightness.value > 95 ? "assets/brightness-10.svg"
+          : brightness.value > 85 ? "assets/brightness-9.svg"
+          : brightness.value > 75 ? "assets/brightness-8.svg"
+          : brightness.value > 65 ? "assets/brightness-7.svg"
+          : brightness.value > 55 ? "assets/brightness-6.svg"
+          : brightness.value > 45 ? "assets/brightness-5.svg"
+          : brightness.value > 35 ? "assets/brightness-4.svg"
+          : brightness.value > 25 ? "assets/brightness-3.svg"
+          : brightness.value > 15 ? "assets/brightness-2.svg"
+          : brightness.value > 5 ? "assets/brightness-1.svg"
+          : "assets/brightness-0.svg"
+          }
+    :text "${brightness.human}"
+    :value "${brightness.value}"
+  )
+)
+
+(defwidget vb [?title ?path text value]
+  (overlay
+    :class "vb"
+    (circular-progress
+      :value "${value}"
+      :thickness 3
+      :start-at 25
+    )
+    (box
+      :orientation "vertical"
+      (overlay
+        (label :yalign "1" :text title :class "vb-title" )
+        (image :path path)
+      )
+      (label :yalign "0.1" :text "${text}")
+    )
+  )
+)

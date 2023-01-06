@@ -1,0 +1,50 @@
+; === VARS ===
+(defvar media '[]')
+; === WINDOW ===
+(defwindow bar
+  :monitor 0
+  :stacking "fg"
+  :exclusive true
+  :geometry (geometry
+    :x "0%"
+    :y "10px"
+    :width "3420px"
+    :height "35px"
+    :anchor "top center"
+  )
+  (bar)
+)
+
+(defwidget bar []
+  (centerbox
+    (bar_left)
+    (bar_center)
+    (bar_right)
+  )
+)
+
+(defwidget bar_left []
+  (box
+    :halign "start"
+    (label :text "LEFT")
+  )
+)
+
+(defwidget bar_center []
+  (box
+    :class 'bar_center'
+    :space-evenly false
+    (label :class 'time' :text "${time.hour}:${time.min}:${time.sec}")
+    (media_summary
+      :visible { arraylength(media) > 0 }
+      :data { media[0] }
+    )
+  )
+)
+
+(defwidget bar_right []
+  (box
+    :halign "end"
+    (label :text "RIGHT")
+  )
+)

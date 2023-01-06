@@ -1,0 +1,86 @@
+; === VARIABLES ===
+; (deflisten media_summary './scripts/media.py summary')
+; (deflisten media_summary 'tail -F media')
+; === SUMMARY WIDGET ===
+(defwidget media_summary [data]
+  (eventbox
+    :visible { data != false }
+    :onclick './scripts/toggle media_preview'
+    :onscroll './scripts/media.py fav {} && eww close media_preview && eww open media_preview'
+    :onhover 'eww open media_preview'
+    :onhoverlost 'eww close media_preview'
+    (box
+      :class 'media_summary'
+      :space-evenly false
+      :spacing 5
+      (label
+        :visible { data.playing ? false : true }
+        :text ''
+      )
+      (label
+        :limit-width 75
+        :text {
+          data.artist != false && data.title != false
+            ? '${data.artist} | ${data.title}' :
+          data.title != false
+            ? data.title
+            : data.artist
+        }
+      )
+    )
+  )
+)
+; === PREVIEW WINDOW
+(defwindow media_preview
+  :monitor 0
+  :stacking "overlay"
+  :geometry (geometry
+    :x "0"
+    :y "10px"
+    :width "250px"
+    :height "10px"
+    :anchor "top center"
+  )
+  (media_preview :data { media[0] })
+)
+(defwidget media_preview [data]
+  (box
+    :space-evenly false
+    (overlay
+      (box
+        :width 50
+        :height 50
+        :class 'media_art ${data.playing ? "paused" : ""}'
+        :style { data.art != false ?
+          "background-image: url('${data.art}')" :
+          "background-image: url('assets/record.svg')"
+        }
+      )
+      (label :visible { data.playing ? false : true } :text '' :style 'font-size: 50')
+    )
+    (box
+      :class 'media_preview_text'
+      :orientation 'v'
+      :spacing 0
+      :space-evenly false
+      :valign 'center'
+      (label
+        :limit-width 100
+        :visible {data.title}
+        :text '${data.title}'
+      )
+      (label
+        :limit-width 100
+        :visible {data.artist}
+        :text '${data.artist}'
+      )
+      (label
+        :limit-width 100
+        :visible {data.album}
+        :text '${data.album}'
+      )
+    )
+  )
+)
+; === STANDALONE MEDIA WIDGET ===
+
