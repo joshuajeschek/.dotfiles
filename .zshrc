@@ -31,6 +31,8 @@ alias h=history
 alias please=sudo
 alias dog=cat
 alias more=less
+alias open=xdg-open
+alias nivm=nvim
 alias zshcfg="nvim ~/.zshrc && source ~/.zshrc"
 alias kittycfg="nvim ~/.config/kitty/kitty.conf"
 alias tt="taskwarrior-tui"
@@ -45,6 +47,7 @@ alias v="wl-paste"
 alias hg="history | grep"
 alias sb="sudo ddcutil -d 1 setvcp 10"
 alias SHUTDOWN="shutdown -h now"
+alias timesync="sudo ntpd -qg && sudo hwclock --systohc"
 
 hash -d Projects=~/Projects
 hash -d Documents=/media/josh/main/Documents
