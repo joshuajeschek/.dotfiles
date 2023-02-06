@@ -14,7 +14,7 @@
     :x "0%"
     :y "10px"
     :width "3420px"
-    :height "35px"
+    :height "25px"
     :anchor "top center"
   )
   (bar)
@@ -27,7 +27,7 @@
     :x "10px"
     :y "5px"
     :width "100px"
-    :height "35px"
+    :height "25px"
     :anchor "top left"
   )
   (label :visible { strlength(clients) != 0} :class "clients" :text clients)
@@ -88,7 +88,12 @@
 
 (defwidget bar_right []
   (box
-    :halign "end"
-    (pill :content '${battery.capacity}%' :icon '${battery.icon}' :minwidth 47 :accent '#B16185')
+    :halign 'end'
+    (eventbox
+      :onscroll './scripts/volume {}'
+      :onclick './scripts/volume control'
+      (pill :content { volume.human } :icon { volume.icon } :minwidth 50 :accent '#448488')
+    )
+    (pill :content '${battery.capacity}%' :icon '${battery.icon}' :minwidth 50 :accent '#B16185')
   )
 )

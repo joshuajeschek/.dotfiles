@@ -3,7 +3,17 @@
 TIMEOUT=3
 
 get() {
-  echo "{\"value\": $(pamixer --get-volume), \"human\": \"$(pamixer --get-volume-human)\", \"time\": $(date +%s)}"
+  VAL=`pamixer --get-volume`
+  HUM=`pamixer --get-volume-human`
+  ICO='ﱝ'
+  if ((VAL >= 30)); then
+    ICO=''
+  elif ((VAL >= 10)); then
+    ICO=''
+  elif ((VAL >= 0)); then
+    ICO=''
+  fi
+  echo "{\"value\": $VAL, \"human\": \"$HUM\", \"icon\": \"$ICO\", \"time\": $(date +%s)}"
 }
 
 close() {
@@ -50,4 +60,5 @@ case "$1" in
   up) up;;
   down) down;;
   mute) mute;;
+  control) pavucontrol &;;
 esac

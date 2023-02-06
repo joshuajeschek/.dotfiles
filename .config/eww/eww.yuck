@@ -31,3 +31,5 @@
 )
 (defvar debug "HELLO THERE")
 (deflisten pdebug "date >> log")
+(deflisten volume :initial './scripts/volume get' 'tail -F /tmp/eww/volume')
+(deflisten brightness :initial './scripts/brightness get' 'tail -F /tmp/eww/brightness')

@@ -1,6 +1,3 @@
-(deflisten volume :initial './scripts/volume get' 'tail -F /tmp/eww/volume')
-(deflisten brightness :initial './scripts/brightness get' 'tail -F /tmp/eww/brightness')
-
 (defwindow volume
   :monitor 0
   :stacking "overlay"
@@ -13,14 +10,9 @@
     :anchor "bottom center"
   )
   (vb
-    :title { volume.human == "muted" ? "ﱝ"
-           : volume.value >= 30 ? ""
-           : volume.value >= 10 ? ""
-           : volume.value > 0 ? ""
-           : "ﱝ"
-           }
-    :text "${volume.human}"
-    :value "${volume.value}"
+    :title { volume.icon }
+    :text { volume.human }
+    :value { volume.value }
   )
 )
 
@@ -48,8 +40,8 @@
           : brightness.value > 5 ? "assets/brightness-1.svg"
           : "assets/brightness-0.svg"
           }
-    :text "${brightness.human}"
-    :value "${brightness.value}"
+    :text { brightness.human }
+    :value { brightness.value }
   )
 )
 
