@@ -1,0 +1,6 @@
+#!/bin/bash
+if [[ "$(eww windows)" == *"*$1"* ]]; then
+  eww close $1
+else
+  eww open $1
+fi

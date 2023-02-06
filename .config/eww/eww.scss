@@ -1,6 +1,12 @@
 // $bg: rgba(#000000, 30%);
 $bg: rgba(#333, 90%);
 $fg: #fff;
+$blue: #448488;
+$red: #cc231c;
+$purple: #b16185;
+$yellow: #d79920;
+$green: #989719;
+
 // $bg: red;
 
 
@@ -17,14 +23,84 @@ $fg: #fff;
 .clipboard,
 .media_preview,
 .media_summary,
-.time {
+.time,
+.clients,
+.privacy,
+tooltip {
   background: $bg;
   border-radius: 10;
   padding: 0 0.5em;
 }
 
-.bar_center > * {
+.time {
   margin: 0 1em;
+}
+
+.privacy  > * {
+  font-size: 30;
+}
+.clients {
+  background: $bg;
+}
+.workspaces {
+  background: $bg;
+  border-radius: 10;
+}
+.workspace {
+  label {
+    font-family: thewitcher, Arial, sans-serif;
+    font-size: 30;
+    padding: 4 4;
+  }
+  border-radius: 10;
+  &.focused {
+    border: 2px solid white;
+  }
+  &:not(.focused) {
+    border: 2px solid transparent;
+  }
+  &:nth-child(1).occupied {
+    color: $blue;
+  }
+  &:nth-child(2).occupied {
+    color: $red;
+  }
+  &:nth-child(3).occupied {
+    color: $purple;
+  }
+  &:nth-child(4).occupied {
+    color: $yellow;
+  }
+  &:nth-child(5).occupied {
+    color: $green;
+  }
+  &:nth-child(1) {
+    color: rgba($blue, 0.4);
+  }
+  &:nth-child(2) {
+    color: rgba($red, 0.4);
+  }
+  &:nth-child(3) {
+    color: rgba($purple, 0.4);
+  }
+  &:nth-child(4) {
+    color: rgba($yellow, 0.4);
+  }
+  &:nth-child(5) {
+    color: rgba($green, 0.4);
+  }
+}
+
+.pill {
+  background: $bg;
+  border-radius: 10;
+  .content {
+    padding: 0 0.5em;
+  }
+  .icon {
+    border-radius: 10;
+    font-size: 30;
+  }
 }
 
 .media_art {
@@ -41,6 +117,7 @@ $fg: #fff;
 .media_preview_text {
   margin: 0.5em;
 }
+
 
 .vb > * {
   margin: 10;

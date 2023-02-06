@@ -1,0 +1,19 @@
+
+mic() {
+  inotifywait -m -e open,close /dev/snd/pcm*c |
+    while read -r path; do
+      echo "$(lsof /dev/snd/pcm*c | awk '$4 == "mem" { print $1 }' | tr '\n' ' ' | awk '{$1=$1};1')"
+    done
+}
+
+cam() {
+  inotifywait -m -e open,close /dev/video* |
+    while read -r path; do
+      echo "$(lsof /dev/video* | awk '$4 == "mem" { print $1 }' | tr '\n' ' ' | awk '{$1=$1};1')"
+    done
+}
+
+case "$1" in
+  mic) mic;;
+  cam) cam;;
+esac

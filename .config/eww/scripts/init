@@ -5,5 +5,8 @@ mkdir /tmp/eww/media
 touch /tmp/eww/media/sock
 touch /tmp/eww/volume
 touch /tmp/eww/brightness
-(~/.config/eww/scripts/clipboard watch > /tmp/eww/clipboard/yuck) &
+($HOME/.config/eww/scripts/clipboard watch > /tmp/eww/clipboard/yuck) &
 eww daemon
+pkill -f "python $HOME/.config/eww/scripts/media"
+$HOME/.config/eww/scripts/mediaserver &
+eww open bar

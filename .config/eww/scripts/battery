@@ -1,0 +1,32 @@
+#!/bin/bash
+
+BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
+CAP=`cat /sys/class/power_supply/${BAT}/capacity`
+STA=`cat /sys/class/power_supply/${BAT}/status` # Full Charging Discharging
+[ "$STA" = 'Charging' ] && charging=1
+ICO='󰂑'
+if [ $STA = 'Full' ]; then
+  ICO='󰂅'
+elif (( CAP >= 90 )); then
+  [[ $charging ]] && ICO='󰂋' || ICO='󰂂'
+elif (( CAP >= 80 )); then
+  [[ $charging ]] && ICO='󰂊' || ICO='󰂁'
+elif (( CAP >= 70 )); then
+  [[ $charging ]] && ICO='󰢞' || ICO='󰂀'
+elif (( CAP >= 60 )); then
+  [[ $charging ]] && ICO='󰂉' || ICO='󰁿'
+elif (( CAP >= 50 )); then
+  [[ $charging ]] && ICO='󰢝' || ICO='󰁾'
+elif (( CAP >= 40 )); then
+  [[ $charging ]] && ICO='󰂈' || ICO='󰁽'
+elif (( CAP >= 30 )); then
+  [[ $charging ]] && ICO='󰂇' || ICO='󰁼'
+elif (( CAP >= 20 )); then
+  [[ $charging ]] && ICO='󰂆' || ICO='󰁻'
+elif (( CAP >= 10 )); then
+  [[ $charging ]] && ICO='󰢜' || ICO='󰁺'
+else
+  [[ $charging ]] && ICO='󰢟' || ICO='󱟩'
+fi
+
+echo "{\"capacity\": $CAP, \"status\": \"$STA\", \"icon\": \"$ICO\"}"

@@ -1,5 +1,10 @@
 ; === VARS ===
 (defvar media '[]')
+(defpoll battery :interval "1m" './scripts/battery')
+(deflisten workspaces './scripts/workspace')
+(defvar clients '')
+(deflisten mic_access './scripts/privacy mic')
+(deflisten cam_access './scripts/privacy cam')
 ; === WINDOW ===
 (defwindow bar
   :monitor 0
@@ -14,6 +19,39 @@
   )
   (bar)
 )
+(defwindow workspace_clients
+  :monitor 0
+  :stacking "overlay"
+  :exclusive false
+  :geometry (geometry
+    :x "10px"
+    :y "5px"
+    :width "100px"
+    :height "35px"
+    :anchor "top left"
+  )
+  (label :visible { strlength(clients) != 0} :class "clients" :text clients)
+)
+; === WIDGETS ===
+(defwidget pill [content icon minwidth accent]
+  (box
+    :class 'pill'
+    :space-evenly false
+    (label :width minwidth :class 'content' :text content)
+    (label :width 35 :class 'icon' :text icon :style 'background: ${accent}')
+  )
+)
+
+(defwidget workspace [id icon classes clients]
+  (eventbox
+    :onscroll "echo {} | sed -e 's/up/-1/g' -e 's/down/+1/g' | xargs hyprctl dispatch workspace"
+    :onhover './scripts/clients ${id} && eww open workspace_clients'
+    :onhoverlost 'eww close workspace_clients'
+    :class "workspace ${classes}"
+    (button :width 40 :onclick "hyprctl dispatch workspace ${id}" "${icon}" )
+  )
+)
+
 
 (defwidget bar []
   (centerbox
@@ -26,7 +64,7 @@
 (defwidget bar_left []
   (box
     :halign "start"
-    (label :text "LEFT")
+    (literal :content workspaces)
   )
 )
 
@@ -34,6 +72,12 @@
   (box
     :class 'bar_center'
     :space-evenly false
+    (box
+      :visible { strlength(mic_access) + strlength(cam_access) != 0 }
+      :class 'privacy'
+      (label :visible { strlength(mic_access) != 0 } :text '󰍬' :tooltip mic_access)
+      (label :visible { strlength(cam_access) != 0 } :text '󰕧' :tooltip cam_access)
+    )
     (label :class 'time' :text "${time.hour}:${time.min}:${time.sec}")
     (media_summary
       :visible { arraylength(media) > 0 }
@@ -45,6 +89,6 @@
 (defwidget bar_right []
   (box
     :halign "end"
-    (label :text "RIGHT")
+    (pill :content '${battery.capacity}%' :icon '${battery.icon}' :minwidth 47 :accent '#B16185')
   )
 )

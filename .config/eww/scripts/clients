@@ -1,0 +1,4 @@
+#! /bin/bash
+
+clients=$(hyprctl clients -j | jq ".[] | select(.workspace.id == $1) | .title" | sed 's/^\"//g' - | sed 's/\"$//g' -)
+eww update clients="$clients"

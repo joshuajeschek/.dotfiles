@@ -2,6 +2,7 @@
 cd ~
 # /usr/bin/wal -R &
 export GTK_THEME="Adwaita:dark"
+export TERMINAL="kitty"
 $HOME/.local/bin/setface &
 
 export _JAVA_AWT_WM_NONREPARENTING=1

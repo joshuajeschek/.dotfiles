@@ -5,28 +5,17 @@
 (defwidget media_summary [data]
   (eventbox
     :visible { data != false }
-    :onclick './scripts/toggle media_preview'
-    :onscroll './scripts/media.py fav {} && eww close media_preview && eww open media_preview'
+    :onclick 'python ./scripts/media p 0'
+    :onscroll 'python ./scripts/media fav {} && eww close media_preview && eww open media_preview'
     :onhover 'eww open media_preview'
     :onhoverlost 'eww close media_preview'
     (box
       :class 'media_summary'
       :space-evenly false
       :spacing 5
-      (label
-        :visible { data.playing ? false : true }
-        :text ''
-      )
-      (label
-        :limit-width 75
-        :text {
-          data.artist != false && data.title != false
-            ? '${data.artist} | ${data.title}' :
-          data.title != false
-            ? data.title
-            : data.artist
-        }
-      )
+      (label :limit-width 15 :visible {data.artist != false} :text '${data.artist}')
+      (label :text { data.playing ? '' : '' })
+      (label :limit-width 50 :visible {data.title != false} :text '${data.title}')
     )
   )
 )
