@@ -2,7 +2,18 @@
 (defvar media '[]')
 (defpoll battery :interval "1m" './scripts/battery')
 (deflisten workspaces './scripts/workspace')
-(defvar clients '')
+(defvar workspace_hover '[]')
+(defvar clients1 '')
+(defvar clients2 '')
+(defvar clients3 '')
+(defvar clients4 '')
+(defvar clients5 '')
+(defvar clients6 '')
+(defvar clients7 '')
+(defvar clients8 '')
+(defvar clients9 '')
+(defvar workspace_occupied '[]')
+(deflisten workspace_focused './scripts/workspace watch')
 (deflisten mic_access './scripts/privacy mic')
 (deflisten cam_access './scripts/privacy cam')
 ; === WINDOW ===
@@ -19,19 +30,6 @@
   )
   (bar)
 )
-(defwindow workspace_clients
-  :monitor 0
-  :stacking "overlay"
-  :exclusive false
-  :geometry (geometry
-    :x "10px"
-    :y "5px"
-    :width "100px"
-    :height "25px"
-    :anchor "top left"
-  )
-  (label :visible { strlength(clients) != 0} :class "clients" :text clients)
-)
 ; === WIDGETS ===
 (defwidget pill [content icon minwidth accent]
   (box
@@ -42,13 +40,29 @@
   )
 )
 
-(defwidget workspace [id icon classes clients]
+(defwidget client [title icon]
+  (image :tooltip title :path icon :image-height 20 :image-width 20)
+)
+(defwidget workspace [id icon ?visible]
   (eventbox
     :onscroll "echo {} | sed -e 's/up/-1/g' -e 's/down/+1/g' | xargs hyprctl dispatch workspace"
-    :onhover './scripts/clients ${id} && eww open workspace_clients'
-    :onhoverlost 'eww close workspace_clients'
-    :class "workspace ${classes}"
-    (button :width 40 :onclick "hyprctl dispatch workspace ${id}" "${icon}" )
+    :onhover './scripts/workspace hover ${id}'
+    :class "workspace${workspace_occupied[id] == true ? ' occupied' : ''}${id == workspace_focused ? ' focused' : ''}"
+    :visible visible
+    :onclick "hyprctl dispatch workspace ${id}"
+    (box
+      :space-evenly false
+      (label :width 40 :text "${icon}" )
+      (revealer
+        :reveal {workspace_hover[id]}
+        :transition 'slideright'
+        :duration 1
+        :visible {workspace_occupied[id]}
+        :style "padding: 0 0.5em"
+
+        (literal :valign 'center' :content '(literal :valign \'center\' :content clients${id})')
+      )
+    )
   )
 )
 
@@ -62,9 +76,24 @@
 )
 
 (defwidget bar_left []
-  (box
-    :halign "start"
-    (literal :content workspaces)
+  (eventbox
+    :onhoverlost './scripts/workspace hover 0'
+    (box
+      :class 'workspaces'
+      :orientation 'h'
+      :spacing 5
+      :space-evenly 'false'
+      :halign 'start'
+      (workspace :id 1 :icon '{')
+      (workspace :id 2 :icon '(')
+      (workspace :id 3 :icon 'X')
+      (workspace :id 4 :icon '}')
+      (workspace :id 5 :icon ')')
+      (workspace :id 6 :icon '6' :visible { workspace_focused == 6 || workspace_occupied[6] })
+      (workspace :id 7 :icon '7' :visible { workspace_focused == 7 || workspace_occupied[7] })
+      (workspace :id 8 :icon '8' :visible { workspace_focused == 8 || workspace_occupied[8] })
+      (workspace :id 9 :icon '9' :visible { workspace_focused == 9 || workspace_occupied[9] })
+    )
   )
 )
 
@@ -79,10 +108,7 @@
       (label :visible { strlength(cam_access) != 0 } :text '󰕧' :tooltip cam_access)
     )
     (label :class 'time' :text "${time.hour}:${time.min}:${time.sec}")
-    (media_summary
-      :visible { arraylength(media) > 0 }
-      :data { media[0] }
-    )
+    (media_summary :visible { arraylength(media) > 0 } :data { media[0] })
   )
 )
 
@@ -91,8 +117,9 @@
     :halign 'end'
     (eventbox
       :onscroll './scripts/volume {}'
-      :onclick './scripts/volume control'
-      (pill :content { volume.human } :icon { volume.icon } :minwidth 50 :accent '#448488')
+      :onclick './scripts/audio rotate'
+      :timeout 1000
+      (pill :class {volume.human == 'muted' ? 'muted' : ''} :content '${volume.value}%' :icon { volume.icon } :minwidth 50 :accent '#448488')
     )
     (pill :content '${battery.capacity}%' :icon '${battery.icon}' :minwidth 50 :accent '#B16185')
   )

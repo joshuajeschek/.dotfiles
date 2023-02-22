@@ -2,6 +2,7 @@
 (include 'clipboard.yuck')
 (include 'vb.yuck') ; volume and brightness control
 (include 'media.yuck')
+(include 'audio.yuck')
 ; ===============
 ;   GLOBAL VARS
 ; ===============
@@ -26,10 +27,10 @@
   )
   (box
     :orientation "h" :valign "left" :width 100
-    (label :wrap true :xalign 0 :text pdebug)
+    (label :wrap true :xalign 0 :text 'hi')
   )
 )
 (defvar debug "HELLO THERE")
 (deflisten pdebug "date >> log")
-(deflisten volume :initial './scripts/volume get' 'tail -F /tmp/eww/volume')
-(deflisten brightness :initial './scripts/brightness get' 'tail -F /tmp/eww/brightness')
+(deflisten volume './scripts/volume get  && tail -F /tmp/eww/volume')
+(deflisten brightness './scripts/brightness get && tail -F /tmp/eww/brightness')

@@ -31,6 +31,7 @@ down() {
   cur=$(get)
   echo $cur >> /tmp/eww/volume
   canberra-gtk-play -i audio-volume-change -d "changevolume"
+  $HOME/.config/eww/scripts/audio refresh
   close $(echo $cur | jq '.time')
 }
 
@@ -41,6 +42,7 @@ up() {
   cur=$(get)
   echo $cur >> /tmp/eww/volume
   canberra-gtk-play -i audio-volume-change -d "changevolume"
+  $HOME/.config/eww/scripts/audio refresh
   close $(echo $cur | jq '.time')
 }
 
@@ -48,10 +50,11 @@ mute() {
   eww close brightness
   eww open volume
   DEFAULT_SINK=$(pactl info | grep "Default Sink" | cut -d " " -f3)
-  pactl set-sink-mute "$DEFAULT_SINK" toggle
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
   cur=$(get)
   echo $cur >> /tmp/eww/volume
   canberra-gtk-play -i audio-volume-change -d "changevolume"
+  $HOME/.config/eww/scripts/audio refresh
   close $(echo $cur | jq '.time')
 }
 

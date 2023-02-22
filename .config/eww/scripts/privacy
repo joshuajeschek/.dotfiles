@@ -1,5 +1,6 @@
 
 mic() {
+  (sleep 1 && lsof /dev/snd/pcm*c | awk '$4 == "mem" { print $1 }' | tr '\n' ' ' | awk '{$1=$1};1') &
   inotifywait -m -e open,close /dev/snd/pcm*c |
     while read -r path; do
       echo "$(lsof /dev/snd/pcm*c | awk '$4 == "mem" { print $1 }' | tr '\n' ' ' | awk '{$1=$1};1')"
@@ -7,8 +8,10 @@ mic() {
 }
 
 cam() {
+  (sleep 1 && lsof /dev/video* | awk '$4 == "mem" { print $1 }' | tr '\n' ' ' | awk '{$1=$1};1') &
   inotifywait -m -e open,close /dev/video* |
     while read -r path; do
+      sleep 1
       echo "$(lsof /dev/video* | awk '$4 == "mem" { print $1 }' | tr '\n' ' ' | awk '{$1=$1};1')"
     done
 }

@@ -10,3 +10,4 @@ eww daemon
 pkill -f "python $HOME/.config/eww/scripts/media"
 $HOME/.config/eww/scripts/mediaserver &
 eww open bar
+(sleep 10 && eww update volume="$($HOME/.config/eww/scripts/volume get)") &

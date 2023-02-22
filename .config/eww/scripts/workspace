@@ -1,72 +1,100 @@
 #! /bin/bash
 
-#define icons for workspaces 1-9
-ICO=( '' '{' '(' 'X' '}' ')' '6' '7' '8' '9')
-
-#initial check for occupied workspaces
-for num in $(hyprctl workspaces | grep ID | awk '{print $3}'); do
-  export o"$num"="occupied"
-done
-
-#initial check for focused workspace
-for num in $(hyprctl monitors | grep -B 4 "focused: yes" | awk 'NR==1{print $3}'); do
-  export f"$num"="focused"
-  export fnum=f"$num"
-  export mon=$(hyprctl monitors | grep -B 2 "\($num\)" | awk 'NR==1{print $2}')
-done
+declare -A OCCUPIED
+OCCUPIED[1]='false'
+OCCUPIED[2]='false'
+OCCUPIED[3]='false'
+OCCUPIED[4]='false'
+OCCUPIED[5]='false'
+OCCUPIED[6]='false'
+OCCUPIED[7]='false'
+OCCUPIED[8]='false'
+OCCUPIED[9]='false'
 
 workspaces() {
-if [[ ${1:0:9} == "workspace" ]] && [[ ${1:11} != "special" ]]; then #set focused workspace
-  unset -v "$fnum"
-  num=${1:11}
-  export f"$num"="focused"
-  export fnum=f"$num"
+  if [[ ${1:0:9} == "workspace" ]] && [[ ${1:11} != "special" ]]; then #set focused workspace
+    num=${1:11}
+    export focused=$num
 
-elif [[ ${1:0:10} == "focusedmon" ]]; then #set focused workspace following monitor focus change
-  unset -v "$fnum"
-  string=${1:12}
-  num=${string##*,}
-  export mon=${string/,*/}
-  export f"$num"="focused"
-  export fnum=f"$num"
+  elif [[ ${1:0:10} == "focusedmon" ]]; then #set focused workspace following monitor focus change
+    string=${1:12}
+    num=${string##*,}
+    export mon=${string/,*/}
+    OCCUPIED[$num]="true"
+    export focused=$num
 
-elif [[ ${1:0:13} == "moveworkspace" ]] && [[ ${1##*,} == "$mon" ]]; then #Set focused workspace following swapactiveworkspace
-  unset -v "$fnum"
-  string=${1:15}
-  num=${string/,*/}
-  export f"$num"="focused"
-  export fnum=f"$num"
+  elif [[ ${1:0:13} == "moveworkspace" ]] && [[ ${1##*,} == "$mon" ]]; then #Set focused workspace following swapactiveworkspace
+    string=${1:15}
+    num=${string/,*/}
+    export focused=$num
 
-elif [[ ${1:0:15} == "createworkspace" ]]; then #set Occupied workspace
-  num=${1:17}
-  export o"$num"="occupied"
-  export onum=o"$num"
+  elif [[ ${1:0:15} == "createworkspace" ]]; then #set Occupied workspace
+    num=${1:17}
+    OCCUPIED[$num]='true'
 
-elif [[ ${1:0:16} == "destroyworkspace" ]]; then #unset unoccupied workspace
-  num=${1:18}
-  unset -v o"$num"
-fi
-}
-module() {
-#output eww widget
-echo $clients
-output="(box :class \"workspaces\"	:orientation \"h\" :spacing 5 :space-evenly \"false\" :valign \"center\""
-output="$output(workspace :id 1 :classes \"$o1 $f1\" :icon \"${ICO[1]}\" :clients \"$c1\")"
-output="$output(workspace :id 2 :classes \"$o2 $f2\" :icon \"${ICO[2]}\" :clients \"$c2\")"
-output="$output(workspace :id 3 :classes \"$o3 $f3\" :icon \"${ICO[3]}\" :clients \"$c3\")"
-output="$output(workspace :id 4 :classes \"$o4 $f4\" :icon \"${ICO[4]}\" :clients \"$c4\")"
-output="$output(workspace :id 5 :classes \"$o5 $f5\" :icon \"${ICO[5]}\" :clients \"$c5\")"
-[[ $o6 == 'occupied' || $f6 == 'focused' ]] && output="$output(workspace :id 6 :classes \"$o6 $f6\" :icon \"${ICO[6]}\")"
-[[ $o7 == 'occupied' || $f7 == 'focused' ]] && output="$output(workspace :id 7 :classes \"$o7 $f7\" :icon \"${ICO[7]}\")"
-[[ $o8 == 'occupied' || $f8 == 'focused' ]] && output="$output(workspace :id 8 :classes \"$o8 $f8\" :icon \"${ICO[8]}\")"
-[[ $o9 == 'occupied' || $f9 == 'focused' ]] && output="$output(workspace :id 9 :classes \"$o9 $f9\" :icon \"${ICO[9]}\")"
-output="$output )"
-echo $output
+  elif [[ ${1:0:16} == "destroyworkspace" ]]; then #unset unoccupied workspace
+    num=${1:18}
+    OCCUPIED[$num]='false'
+  fi
 }
 
-module
+clients() {
+  clients=`hyprctl clients -j | jq -r ".[] | select(.workspace.id == $1) | (.class | ascii_downcase) + \"\t\" + .title"`
+  classes=$(awk -F'\t' '{ print $1 }' <<< $clients | sort | uniq)
+  declare -A icons
+  for class in $classes; do
+    icons[$class]=`$HOME/.config/eww/scripts/util icon $class`
+  done
+  if [ -z "$clients" ]; then return; fi
+  clients=$(awk -F'\t' '{ print "(client :title \"" $2 "\" :icon \"ICON::"$1"\")"}' <<< $clients)
+  for class in "${!icons[@]}"; do
+    icon=${icons[$class]//\//\\/}
+    clients=$(sed "s/ICON::$class/$icon/g" <<< $clients)
+  done
+  clients=$(tr -s '\n' ' ' <<< $clients)
+  clients=$(sed 's/"/\"/g' <<< "$clients")
+  eww update clients$1="(box :class 'clients' :spacing 10 $clients)"
+}
 
-socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | while read -r event; do
-workspaces "$event"
-module
-done
+update() {
+  occupied='[false'
+  for ((i=1;i<10;i++)); do
+    clients $i &
+    occupied="$occupied, ${OCCUPIED[$i]}"
+  done
+  occupied="$occupied]"
+  eww update workspace_occupied="$occupied"
+  echo $focused
+}
+
+watch() {
+  #initial check for occupied workspaces
+  for num in $(hyprctl workspaces | grep ID | awk '{print $3}'); do OCCUPIED[$num]='true'; done
+
+  #initial check for focused workspace
+  for num in $(hyprctl monitors | grep -B 4 "focused: yes" | awk 'NR==1{print $3}'); do
+    export mon=$(hyprctl monitors | grep -B 2 "\($num\)" | awk 'NR==1{print $2}')
+    export focused=$num
+  done
+
+  update
+
+  socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | while read -r event; do
+  workspaces "$event"
+  update
+  done
+}
+
+hover() {
+  res='[false'
+  for ((i=1;i<10;i++)); do
+    [[ "$i" -eq "$1" ]] && res="$res, true" || res="$res, false"
+  done
+  res="$res]"
+  eww update workspace_hover="$res"
+}
+
+case "$1" in
+  watch) watch;;
+  hover) hover $2;;
+esac

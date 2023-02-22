@@ -2,9 +2,9 @@
 ; (deflisten media_summary './scripts/media.py summary')
 ; (deflisten media_summary 'tail -F media')
 ; === SUMMARY WIDGET ===
-(defwidget media_summary [data]
+(defwidget media_summary [data ?visible]
   (eventbox
-    :visible { data != false }
+    :visible visible
     :onclick 'python ./scripts/media p 0'
     :onscroll 'python ./scripts/media fav {} && eww close media_preview && eww open media_preview'
     :onhover 'eww open media_preview'
@@ -13,9 +13,9 @@
       :class 'media_summary'
       :space-evenly false
       :spacing 5
-      (label :limit-width 15 :visible {data.artist != false} :text '${data.artist}')
+      (label :limit-width 30 :visible {data.artist != false} :text '${data.artist}')
       (label :text { data.playing ? '' : '' })
-      (label :limit-width 50 :visible {data.title != false} :text '${data.title}')
+      (label :limit-width 60 :visible {data.title != false} :text '${data.title}')
     )
   )
 )
