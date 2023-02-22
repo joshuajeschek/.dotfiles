@@ -1,0 +1,14 @@
+#!/bin/bash
+icon() {
+  if [ -f "/usr/share/applications/$1.desktop" ]; then
+    match=$(grep 'Icon=' < /usr/share/applications/$1.desktop | awk '{print $NF}')
+    icon=${match#*=}
+    find /usr/share/icons | grep $icon.png -m 1
+  else
+    find /usr/share/icons | grep $1.*png -m 1
+  fi
+}
+
+case "$1" in
+  icon) icon $2;;
+esac

@@ -1,0 +1,87 @@
+; === VARIABLES ===
+(defvar sinks '[]')
+(defvar sources '[]')
+(defvar sinks_eww '')
+(defvar sources_eww '')
+(defvar audio_content '')
+; === AUDIO WINDOW ===
+(defwindow audio
+  :monitor 0
+  :stacking "overlay"
+  ; :focusable true
+  :geometry (geometry
+    :x "100px"
+    :y "10px"
+    :width "400px"
+    :height "100px"
+    :anchor "top right"
+  )
+  (audio)
+)
+; === MAIN WIDGET ===
+(defwidget audio []
+  (box
+    :space-evenly false
+    :orientation 'v'
+    (box
+      (literal :class 'audio-content' :content {audio_content == 'sinks' ? sinks_eww : sources_eww })
+    )
+  )
+)
+; === HELPER WIDGETS ===
+(defwidget sink [data]
+  (box
+    :orientation 'v'
+    (box
+      :space-evenly false
+      :halign 'start'
+      :spacing 10
+      (label :width 350 :limit-width 50 :xalign 0 :text '${data.description}')
+      (button
+        :class 'audio-control${data.mute ? ' active' : ''}'
+        :onclick 'pactl set-sink-mute ${data.name} toggle && ./scripts/audio refresh'
+        (label :text {data.mute ? '' : ''})
+      )
+      (button
+        :class 'audio-control${data.default ? ' active' : ''}'
+        :onclick 'pactl set-default-sink ${data.name} && ./scripts/audio refresh'
+        (label :text {data.default ? '' : ''})
+      )
+    )
+    (box
+      :space-evenly false
+      :spacing 10
+      (scale
+        :value {data.volume} :orientation 'h' :width 350 :max 101 :class { data.volume == 100 ? 'full' : '' }
+        :onchange 'pactl set-sink-volume ${data.name} {}% && ./scripts/audio refresh'
+      )
+      (label :text '${data.volume}%')
+    )
+  )
+)
+(defwidget source [data]
+  (box
+    :orientation 'v'
+    :visible {data.corked != true}
+    (box
+      :space-evenly false
+      :halign 'start'
+      :spacing 10
+      (label :width 350 :limit-width 50 :xalign 0 :text '${data.name} - ${data.application}')
+      (button
+        :class 'audio-control${data.mute ? ' active' : ''}'
+        :onclick 'pactl set-sink-input-mute ${data.index} toggle && ./scripts/audio refresh'
+        (label :text {data.mute ? '' : ''})
+      )
+    )
+    (box
+      :space-evenly false
+      :spacing 10
+      (scale
+        :value {data.volume} :orientation 'h' :width 350 :max 101 :class { data.volume == 100 ? 'full' : '' }
+        :onchange 'pactl set-sink-input-volume ${data.index} {}% && ./scripts/audio refresh'
+      )
+      (label :width 40 :text '${data.volume}%')
+    )
+  )
+)
