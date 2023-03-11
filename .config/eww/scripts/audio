@@ -26,7 +26,9 @@ refresh() {
   eww update sources="$(sed 's/"/\"/g' <<< $sources | tr -s '\n' ' ')"
   eww update sinks="$(sed 's/"/\"/g' <<< $sinks | tr -s '\n' ' ')"
   # update other instances (only matters with default sink)
-  echo $($HOME/.config/eww/scripts/volume get) >> /tmp/eww/volume
+  if [[ -z $1 ]]; then
+    echo $($HOME/.config/eww/scripts/volume get) >> /tmp/eww/volume
+  fi
 }
 update() {
   refresh
@@ -62,7 +64,7 @@ rotate() {
 }
 
 case "$1" in
-  refresh) refresh;;
+  refresh) refresh $2;;
   update) update;;
   rotate) rotate;;
 esac

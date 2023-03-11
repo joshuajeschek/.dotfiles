@@ -31,7 +31,7 @@ down() {
   cur=$(get)
   echo $cur >> /tmp/eww/volume
   canberra-gtk-play -i audio-volume-change -d "changevolume"
-  $HOME/.config/eww/scripts/audio refresh
+  $HOME/.config/eww/scripts/audio refresh external
   close $(echo $cur | jq '.time')
 }
 
@@ -42,7 +42,7 @@ up() {
   cur=$(get)
   echo $cur >> /tmp/eww/volume
   canberra-gtk-play -i audio-volume-change -d "changevolume"
-  $HOME/.config/eww/scripts/audio refresh
+  $HOME/.config/eww/scripts/audio refresh external
   close $(echo $cur | jq '.time')
 }
 
@@ -54,7 +54,7 @@ mute() {
   cur=$(get)
   echo $cur >> /tmp/eww/volume
   canberra-gtk-play -i audio-volume-change -d "changevolume"
-  $HOME/.config/eww/scripts/audio refresh
+  $HOME/.config/eww/scripts/audio refresh external
   close $(echo $cur | jq '.time')
 }
 
