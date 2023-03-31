@@ -1,5 +1,5 @@
 configuration {
-	modes: "window,drun,run,ssh,combi,filebrowser";
+	modes: "window,drun,run,ssh,combi,filebrowser,emoji";
 	font: "CaskaydiaCove Nerd Font Mono 12";
 /*	location: 0;*/
 /*	yoffset: 0;*/
