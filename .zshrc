@@ -60,6 +60,7 @@ hash -d Videos=/media/josh/main/Videos
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH="$HOME/.ghcup/bin:$PATH"
 export EDITOR="/usr/bin/nvim"
+export ZVM_VI_EDITOR="/usr/bin/nvim"
 export VISUAL="/usr/bin/nvim"
 export STARSHIP_LOG="error"
 export SUDO_PROMPT=$'\a[sudo] please enter your password: '
