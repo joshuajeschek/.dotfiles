@@ -92,3 +92,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 eval "$(starship init zsh)"
 # zprof
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/home/josh/.cache/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;

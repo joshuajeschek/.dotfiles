@@ -1,15 +1,15 @@
 font:
   normal:
-    family: Cascadia Code PL
+    family: Caskaydia Cove Nerd Font Complete
     style: Regular
   bold:
-    family: Cascadia Code PL
+    family: Caskaydia Cove Nerd Font Complete
     style: Bold
   italic:
-    family: Cascadia Code PL
+    family: Caskaydia Cove Nerd Font Complete
     style: Italic
   bold_italic:
-    family: Cascadia Code PL
+    family: Caskaydia Cove Nerd Font Complete
     style: Bold Italic
   size: 13
 

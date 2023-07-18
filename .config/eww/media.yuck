@@ -14,7 +14,7 @@
       :space-evenly false
       :spacing 5
       (label :limit-width 30 :visible {data.artist != false} :text '${data.artist}')
-      (label :text { data.playing ? '' : '' })
+      (label :text { data.playing ? '󰐊' : '󰏤' })
       (label :limit-width 60 :visible {data.title != false} :text '${data.title}')
     )
   )
@@ -45,7 +45,7 @@
           "background-image: url('assets/record.svg')"
         }
       )
-      (label :visible { data.playing ? false : true } :text '' :style 'font-size: 50')
+      (label :visible { data.playing ? false : true } :text '󰏤' :style 'font-size: 50')
     )
     (box
       :class 'media_preview_text'

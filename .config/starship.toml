@@ -33,7 +33,7 @@ format = '[$branch ](bg:bg)[](fg:git bg:bg)[$symbol](bg:git)[](git)'
 
 [cmd_duration]
 min_time = 1
-format = '[ ](bg)[$duration ](bg:bg)[](fg:dur bg:bg)[ﮫ](bg:dur)[](dur)'
+format = '[ ](bg)[$duration ](bg:bg)[](fg:dur bg:bg)[󰚭](bg:dur)[](dur)'
 
 [jobs]
 symbol = ""
