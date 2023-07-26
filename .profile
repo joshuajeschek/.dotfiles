@@ -32,3 +32,8 @@ chown -R josh:josh /media/josh/main &
 export PATH="$HOME/.poetry/bin:$PATH"
 . "$HOME/.cargo/env"
 
+
+
+# Added by Toolbox App
+export PATH="$PATH:/home/josh/.local/share/JetBrains/Toolbox/scripts"
+
