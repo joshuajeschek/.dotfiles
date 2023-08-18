@@ -21,11 +21,12 @@
   :monitor 0
   :stacking "fg"
   :exclusive true
+  :namespace "eww-bar"
   :geometry (geometry
     :x "0%"
     :y "10px"
-    :width "99%"
-    :height "25px"
+    :width "3420px"
+    :height "40px"
     :anchor "top center"
   )
   (bar)
