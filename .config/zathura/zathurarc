@@ -1,22 +1,26 @@
-set font                    "CaskaydiaCove Nerd Font Mono 12"
-set selection-notification	"true"
-set selection-clipboard		"clipboard"
-set guioptions			    "sv"
-set scroll-page-aware		"true"
-set statusbar-home-tilde	"true"
-set recolor			        "true"
-set adjust-open			    "width"
-set statusbar-h-padding		10
-set statusbar-v-padding		10
+set font                   "CaskaydiaCove Nerd Font Mono 12"
+set selection-notification "true"
+set selection-clipboard    "clipboard"
+set guioptions             "sv"
+set scroll-page-aware      "true"
+set statusbar-home-tilde   "true"
+set recolor                "true"
+set recolor-keephue        "true"
+set adjust-open            "width"
+set statusbar-h-padding    10
+set statusbar-v-padding    10
+
 include zathura-gruvbox-dark
 
 map 1 set 'recolor-darkcolor "#ffffff"'
 map 2 set 'recolor-lightcolor "#000000"'
 map 4 set 'recolor-darkcolor "#ebdbb2"'
 map 5 set 'recolor-lightcolor "rgba(0,0,0,0)"'
+
 # doesn't work right now
 # map 3 feedkeys ':map D feedkeys "456"'
 # map 6 feedkeys ':map D feedkeys "123"'
 # map D feedkeys '123'
+
 map <F1> feedkeys '12'
 map <F2> feedkeys '45'
