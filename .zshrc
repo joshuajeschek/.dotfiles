@@ -33,6 +33,7 @@ alias dog=cat
 alias more=less
 alias open=xdg-open
 alias nivm=nvim
+alias nmt=neomutt
 alias zshcfg="nvim ~/.zshrc && source ~/.zshrc"
 alias kittycfg="nvim ~/.config/kitty/kitty.conf"
 alias tt="taskwarrior-tui"

@@ -1,6 +1,8 @@
 ; === VARS ===
 (defvar media '[]')
 (defpoll battery :interval "1m" './scripts/battery')
+(defpoll mail_num :interval "1m" 'find ~/.local/share/mail/*/INBOX/new -type f | wc -l')
+(defpoll mail_detail :interval "1m" './scripts/mail')
 (deflisten workspaces './scripts/workspace')
 (defvar workspace_hover '[]')
 (defvar clients1 '')
@@ -25,6 +27,7 @@
   :geometry (geometry
     :x "0%"
     :y "10px"
+    ; :width "1900px"
     :width "3420px"
     :height "35px"
     :anchor "top center"
@@ -32,11 +35,11 @@
   (bar)
 )
 ; === WIDGETS ===
-(defwidget pill [content icon minwidth accent]
+(defwidget pill [content icon ?tooltip minwidth accent]
   (box
     :class 'pill'
     :space-evenly false
-    (label :width minwidth :class 'content' :text content)
+    (label :width minwidth :class 'content' :text content :tooltip tooltip)
     (label :width 35 :class 'icon' :text icon :style 'background: ${accent}')
   )
 )
@@ -116,6 +119,7 @@
 (defwidget bar_right []
   (box
     :halign 'end'
+    (pill :content '${mail_num}' :icon '' :tooltip '${mail_detail}' :minwidth 50 :accent {mail_num > 5 ? mail_num > 10 ? '#CC231C' : '#D79920' : '#989719'})
     (eventbox
       :onscroll './scripts/volume {}'
       :onclick './scripts/audio rotate'
