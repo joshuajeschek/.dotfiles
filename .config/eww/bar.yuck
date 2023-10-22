@@ -119,7 +119,11 @@
 (defwidget bar_right []
   (box
     :halign 'end'
-    (pill :content '${mail_num}' :icon '' :tooltip '${mail_detail}' :minwidth 50 :accent {mail_num > 5 ? mail_num > 10 ? '#CC231C' : '#D79920' : '#989719'})
+    (eventbox
+      :onclick 'kitty neomutt &'
+      :timeout 1000
+      (pill :content '${mail_num}' :icon '' :tooltip '${mail_detail}' :minwidth 50 :accent {mail_num > 0 ? mail_num > 5 ? '#CC231C' : '#D79920' : '#989719'})
+    )
     (eventbox
       :onscroll './scripts/volume {}'
       :onclick './scripts/audio rotate'
