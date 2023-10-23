@@ -1,0 +1,30 @@
+# vim: filetype=neomuttrc
+# source after config by mutt-wizard is executed
+set query_command = "khard email --parsable --search-in-source-files %s"
+set sort          = 'reverse-threads'
+set sort_aux      = 'date-received'
+set sidebar_width = 27
+unset beep
+
+macro index,pager A "<pipe-message>khard add-email<return>" "add address to contacts"
+
+# Default index colors:
+# color index white default '.*'
+# color index_author brightwhite default '.*'
+# color index_number blue default
+# color index_subject green default '.*'
+
+# New mail:
+# color index brightyellow black "~N"
+# color index_author brightyellow black "~N"
+# color index_subject yellow black "~N"
+
+# Tagged mail is highlighted:
+# color index brightyellow blue "~T"
+# color index_author brightred blue "~T"
+# color index_subject brightcyan blue "~T"
+
+# Flagged mail is highlighted:
+# color index brightgreen default "~F"
+# color index_subject brightgreen default "~F"
+# color index_author brightgreen default "~F"
