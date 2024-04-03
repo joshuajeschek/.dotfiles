@@ -3,10 +3,12 @@
 set query_command = "khard email --parsable --search-in-source-files %s"
 set sort          = 'reverse-threads'
 set sort_aux      = 'date-received'
-set sidebar_width = 27
+set sidebar_width = 29
 unset beep
 
 macro index,pager A "<pipe-message>khard add-email<return>" "add address to contacts"
+
+my_hdr User-Agent: JoshMail/4.2
 
 # Default index colors:
 # color index white default '.*'

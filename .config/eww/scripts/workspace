@@ -43,7 +43,7 @@ clients() {
   classes=$(awk -F'\t' '{ print $1 }' <<< $clients | sort | uniq)
   declare -A icons
   for class in $classes; do
-    icons[$class]=`$HOME/.config/eww/scripts/util icon $class`
+    icons[$class]=`$HOME/.local/bin/get-icon $class`
   done
   if [ -z "$clients" ]; then return; fi
   clients=$(awk -F'\t' '{ print "(client :title \"" $2 "\" :icon \"ICON::"$1"\")"}' <<< $clients)
