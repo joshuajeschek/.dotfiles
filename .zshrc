@@ -23,9 +23,9 @@ export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
 
 # add user local bin
 if [ -d "$HOME/.local/bin" ] ; then
-  PATH="$PATH:$HOME/.local/bin"
-  PATH="$PATH:$HOME/.nvm"
-  PATH="$PATH:$HOME/.yarn/bin"
+  export PATH="$PATH:$HOME/.local/bin"
+  export PATH="$PATH:$HOME/.nvm"
+  export PATH="$PATH:$HOME/.yarn/bin"
 fi
 
 # (&>/dev/null wal -R &)
