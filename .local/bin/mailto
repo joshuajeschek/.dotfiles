@@ -10,6 +10,8 @@ urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
 email=$(echo "$1" | sed -n 's/mailto:\([^?]*\).*/\1/p')
 query_string=$(echo "$1" | grep -o '?.*')
 
+echo "$1" >> /tmp/mailto_debug.log
+
 # Default values if no subject or body are specified
 subject=""
 body=""
@@ -99,4 +101,4 @@ temp_body=$(mktemp /tmp/mutt_temp_body_XXXXXX)
 echo "$body" > "$temp_body"
 
 # Launch neomutt using the temporary configuration file and the extracted email address
-neomutt -F "$temp_config" -s "$subject" -i "$temp_body" -- "$email"
+/usr/bin/neomutt -F "$temp_config" -s "$subject" -i "$temp_body" -- "$email"

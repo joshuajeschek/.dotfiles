@@ -36,22 +36,21 @@ alias dog=cat
 alias more=less
 alias open=xdg-open
 alias nivm=nvim
-alias nmt="neomutt && ((pgrep mbsync && pkill mbsync) || exit 0)"
-alias zshcfg="nvim ~/.zshrc && source ~/.zshrc"
-alias kittycfg="nvim ~/.config/kitty/kitty.conf"
-alias tt="taskwarrior-tui"
-alias kk="vdirsyncer -v WARNING sync google; khal interactive; (vdirsyncer -v WARNING sync google &)"
-alias den="code ~/dendron/dendron.code-workspace"
-alias backup-config="mackup backup && ~/dotfiles/sync.sh"
-alias save-command="source ~/.scripts/save-command.sh"
-alias zshfetch="neofetch; zsh"
-alias s="kitty +kitten ssh"
-alias c="wl-copy"
-alias v="wl-paste"
-alias hg="history | grep"
-alias sb="sudo ddcutil -d 1 setvcp 10"
-alias SHUTDOWN="shutdown -h now"
-alias timesync="sudo ntpd -qg && sudo hwclock --systohc"
+alias nmt='neomutt && ((pgrep mbsync && pkill mbsync) || exit 0)'
+alias zshcfg='nvim ~/.zshrc && source ~/.zshrc'
+alias kittycfg='nvim ~/.config/kitty/kitty.conf'
+alias kk='vdirsyncer -v WARNING sync google; khal interactive; (vdirsyncer -v WARNING sync google &)'
+alias den='code ~/dendron/dendron.code-workspace'
+alias backup-config='mackup backup && ~/dotfiles/sync.sh'
+alias save-command='source ~/.scripts/save-command.sh'
+alias zshfetch='neofetch; zsh'
+alias s='kitty +kitten ssh'
+alias c='wl-copy'
+alias v='wl-paste'
+alias hg='history | grep'
+alias sb='sudo ddcutil -d 1 setvcp 10'
+alias SHUTDOWN='shutdown -h now'
+alias timesync='sudo ntpd -qg && sudo hwclock --systohc'
 
 hash -d Projects=~/Projects
 hash -d Documents=/media/josh/main/Documents
@@ -76,6 +75,7 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 
 [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 # export PATH="/opt/anaconda/bin:$PATH"  # commented out by conda initialize
 # [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
 # [ -f "/home/josh/.ghcup/env" ] && source "/home/josh/.ghcup/env" # ghcup-env
