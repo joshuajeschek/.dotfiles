@@ -1,0 +1,102 @@
+#!/bin/bash
+# Directory where account configurations are stored
+ACCOUNT_DIR="$HOME/.config/mutt/accounts"
+CONFIG_FILE="$HOME/.config/mutt/muttrc"
+
+# Function to URL-decode strings from a URL
+urldecode() { : "${*//+/ }"; echo -e "${_//%/\\x}"; }
+
+# Extract the email address, subject, and body from the mailto link
+email=$(echo "$1" | sed -n 's/mailto:\([^?]*\).*/\1/p')
+query_string=$(echo "$1" | grep -o '?.*')
+
+# Default values if no subject or body are specified
+subject=""
+body=""
+
+# Parse the query string for subject and body
+if [[ -n "$query_string" ]]; then
+    subject=$(echo "$query_string" | sed -n 's/.*[?&]subject=\([^&]*\).*/\1/p' | sed 's/%20/ /g')
+    body=$(echo "$query_string" | sed -n 's/.*[?&]body=\([^&]*\).*/\1/p' | sed 's/%20/ /g')
+
+    # URL-decode the subject and body
+    subject=$(urldecode "$subject")
+    body=$(urldecode "$body")
+fi
+
+# Display extracted email, subject, and body
+echo -e "\033[1;34mEmail to:\033[0m $email"
+echo -e "\033[1;34mSubject:\033[0m $subject"
+if [ -z "$body" ]; then
+    echo -e "\033[1;34mMessage body:\033[0m None"
+else
+    echo -e "\033[1;34mMessage body:\033[0m $body"
+fi
+
+echo "===================="
+
+# Directory where account configurations are stored
+account_files=("$ACCOUNT_DIR"/*)
+
+# Create an associative array to hold account file and their first appearance line number
+declare -A account_lines
+
+# Initialize line counter
+line_number=0
+
+# Populate the array with the account files and their first appearance
+while IFS= read -r line; do
+    ((line_number++))  # Increment line counter for each line read
+    for account_file in "${account_files[@]}"; do
+        account_name="${account_file##*/}"
+        # Check if the line contains the name of the account configuration file
+        if [[ "$line" =~ source\ .*${account_name} ]]; then
+            # If this account's first occurrence has not been recorded yet, record it
+            [[ "${account_lines[$account_name]+exists}" ]] || account_lines["$account_name"]=$line_number
+        fi
+    done
+done < "$CONFIG_FILE"
+
+echo "${account_lines[@]}"
+
+IFS=$'\n' account_files=($(for account in "${!account_lines[@]}"; do echo "${account_lines[$account]} $account"; done | sort -n | awk '{print $2}'))
+unset IFS
+
+# List available accounts
+echo -e "\033[1;33mAvailable accounts:\033[0m"
+for i in "${!account_files[@]}"; do
+  account_name="${account_files[i]##*/}"
+  account_name="${account_name%.muttrc}"  # Remove the '.muttrc' suffix
+  echo -e "\033[1;32m$((i+1)))\033[0m $account_name"
+done
+
+# Ask the user to choose an account
+echo -e "\033[0;36mChoose an account to write the email (1-${#account_files[@]}):\033[0m"
+read -p "> " choice
+selected_account="$ACCOUNT_DIR/${account_files[$((choice-1))]}"
+
+# Validate the user's choice
+if [[ -z "$selected_account" || ! -f "$selected_account" ]]; then
+  echo -e "\033[1;31mInvalid choice. Exiting.\033[0m"
+  exit 1
+fi
+
+# Create a temporary copy of the main mutt configuration
+temp_config=$(mktemp /tmp/mutt_temp_muttrc_XXXXXX)
+
+# Check if temp file was created successfully
+if [ ! -f "$temp_config" ]; then
+  echo -e "\033[1;31mFailed to create temporary files. Exiting.\033[0m"
+  exit 1
+fi
+
+cp "$HOME/.config/mutt/muttrc" "$temp_config"
+
+# Modify the second line of the temporary configuration file
+sed -i "2s|.*|source $selected_account|" "$temp_config"
+
+temp_body=$(mktemp /tmp/mutt_temp_body_XXXXXX)
+echo "$body" > "$temp_body"
+
+# Launch neomutt using the temporary configuration file and the extracted email address
+neomutt -F "$temp_config" -s "$subject" -i "$temp_body" -- "$email"
