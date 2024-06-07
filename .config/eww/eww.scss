@@ -9,7 +9,37 @@ $green: #989719;
 
 $border-radius: 12;
 
+.corner {
+  &.t.l {
+    border-radius: 100% 0 0 0;
+  }
+  &.t.r {
+    border-radius: 0 100% 0 0;
+  }
+  &.b.r {
+    border-radius: 0 0 100% 0;
+  }
+  &.b.l {
+    border-radius: 0 0 0 100%;
+  }
+  &.t {
+    border-top: 20px solid black;
+  }
+  &.b {
+    border-bottom: 20px solid black;
+  }
+  &.l {
+    border-left: 20px solid black;
+  }
+  &.r {
+    border-right: 20px solid black;
+  }
+}
 
+// .corner_inner {
+//   background: white;
+//   border-radius: 20px 0 0 0;
+// }
 
 * {
   all: unset;

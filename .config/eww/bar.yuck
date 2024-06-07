@@ -22,14 +22,14 @@
 (defwindow bar
   :monitor 0
   :stacking "fg"
-  :exclusive true
+  ; :exclusive true
   :namespace "eww-bar"
   :geometry (geometry
     :x "0%"
     :y "10px"
     ; :width "1900px"
     :width "3420px"
-    :height "35px"
+    :height "40px"
     :anchor "top center"
   )
   (bar)

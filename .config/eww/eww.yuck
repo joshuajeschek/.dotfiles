@@ -3,6 +3,7 @@
 (include 'vb.yuck') ; volume and brightness control
 (include 'media.yuck')
 (include 'audio.yuck')
+(include 'corners.yuck')
 ; ===============
 ;   GLOBAL VARS
 ; ===============
