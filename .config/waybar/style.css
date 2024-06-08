@@ -4,87 +4,88 @@
 @define-color purple #b16185;
 @define-color yellow #d79920;
 @define-color green #989719;
+@define-color bg rgba(0, 0, 0, 0.6);
+@define-color primary #7C8E76;
 
 window#waybar {
-    /* background-color: rgba(0, 0, 0, 0.3); */
     background: transparent;
     font-family: CaskaydiaCove Nerd Font Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 button {
   border: none;
 }
 
-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
 /* single modules */
 #clock,
 #workspaces,
+#tray,
+#window {
+  border-radius: 20px;
+  background: @bg;
+  color: white;
+}
+
+/* default horizontal padding */
+#clock,
 #custom-spotify,
 #tray,
 #window {
-    border-radius: 15px;
-    background: @grey;
-    color: white;
-    opacity: 1;
-    padding: 0px 10px;
-    margin: 0 0.5em 0 0;
+  padding: 0 15px;
+}
+
+/* left aligned modules */
+#workspaces,
+#window {
+  margin: 0 10px 0 0;
 }
 
 #workspaces {
-    padding: 0px;
+    padding: 0;
     font-family: thewitcher, Arial, sans-serif;
     font-size: 19px;
-    border-radius: 15px;
-    background: @grey;
 }
-
 #workspaces button {
-    padding: 2px 5px 0px;
-    color: #ffffff;
-    margin: 2px;
-    border-radius: 15px;
-    border: 2px solid rgba(0, 0, 0, 0); /* fixes spacing */
+    padding: 0 15px;
+    color: white;
+    border-radius: 20px;
+    margin: 0 0 0 -5px;
 }
-
 #workspaces button:nth-child(1) {
-  color: @blue;
+  margin: 0;
 }
-#workspaces button:nth-child(2) {
-  color: @red;
-}
-#workspaces button:nth-child(3) {
-  color: @purple;
-}
-#workspaces button:nth-child(4) {
-  color: @yellow;
-}
-#workspaces button:nth-child(5) {
-  color: @green;
-}
-
-
 #workspaces button.active {
-    box-shadow: 0 0 0 2px white;
-    background: @grey;
+    color: white;
+    background: @primary;
 }
-
+#workspaces button.empty:not(.active) {
+  color: @primary;
+}
 #workspaces button.urgent {
     background-color: @red;
 }
 
+#custom-spotify {
+  font-family: sans-serif;
+}
+
+big {
+  background: @primary;
+  font-size: 1.25em;
+  padding: 0 15px;
+  /* padding: 0 0.75em; */
+  border-radius: 20px;
+  /* box-shadow: -6px 0px 0px 2px @grey; */
+  margin: 0 0 0 -30px;
+}
+
 /* status modules */
-#battery,
 #cpu,
 #memory,
 #disk,
 #temperature,
-#backlight,
-#network,
-#pulseaudio {
+#network {
     background: @grey;
     color: white;
     opacity: 1;
@@ -97,14 +98,45 @@ label:disabled {
 #cpu,
 #memory,
 #temperature,
-#backlight,
-#battery,
-#pulseaudio,
 #network {
   border-radius: 15px 0 0 15px;
   padding: 0 0.75em;
   margin: 0 0 0 0.5em;
 }
+
+#custom-icon-spacer {
+  background: @bg;
+  padding: 0 20px;
+  margin: 0 -10px 0 0;
+}
+
+#battery,
+#backlight,
+#pulseaudio,
+#custom-spotify {
+  padding: 0 35px 0 15px;
+  background: @bg;
+  border-radius: 20px 0 0 20px;
+  padding-right: 5px;
+  margin-left: 10px;
+}
+
+#custom-icon-left {
+  background: @primary;
+  border-radius: 20px 0 0 20px;
+  padding-left: 20px;
+  margin-right: -5px;
+}
+
+/* all custom-icon-left parents */
+.modules-right > *:nth-child(11),
+.modules-right > *:nth-child(8),
+.modules-right > *:nth-child(5),
+.modules-right > *:nth-child(2) {
+  background: @bg;
+}
+
+#custom-spotify-icon,
 #custom-pulseaudio-icon,
 #custom-network-icon,
 #custom-cpu-icon,
@@ -112,29 +144,11 @@ label:disabled {
 #custom-temperature-icon,
 #custom-backlight-icon,
 #custom-battery-icon {
-  font-size: 1.25em;
-  padding: 0 0.75em;
-  border-radius: 15px;
-  box-shadow: -6px 0px 0px 2px @grey;
-}
-#custom-cpu-icon {
-  background: @green;
-}
-#custom-memory-icon {
-  background: @green;
-}
-#custom-temperature-icon {
-  background: @green;
-}
-#custom-backlight-icon {
-  background: @purple;
-}
-#custom-battery-icon {
-  background: @purple;
-}
-#custom-network-icon {
-  background: @blue;
-}
-#custom-pulseaudio-icon {
-  background: @blue;
+  background: @primary;
+  font-size: 1.75em;
+  padding-right: 15px;
+  border-radius: 0 20px 20px 0;
+  margin: 0 0 0 0px;
+  box-shadow: -15px 0 0 0 @bg;
+  box-shadow: unset;
 }
