@@ -6,11 +6,14 @@
 @define-color green #989719;
 @define-color bg rgba(0, 0, 0, 0.6);
 @define-color primary #7C8E76;
+@define-color active white;
+@define-color inactive #7C8E76;
 
 window#waybar {
     background: transparent;
     font-family: CaskaydiaCove Nerd Font Mono, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px;
+    color: white;
 }
 
 button {
@@ -18,27 +21,32 @@ button {
 }
 
 /* single modules */
-#clock,
 #workspaces,
 #tray,
-#window {
+#window,
+#privacy {
+  padding: 0 15px;
   border-radius: 20px;
   background: @bg;
   color: white;
 }
 
-/* default horizontal padding */
-#clock,
-#custom-spotify,
-#tray,
-#window {
-  padding: 0 15px;
+#custom-shutdown,
+#custom-reboot,
+#clock {
+  background: @bg;
+}
+
+#custom-shutdown,
+#custom-reboot {
+  font-size: 1.75em;
+  padding-left: 5px;
 }
 
 /* left aligned modules */
 #workspaces,
 #window {
-  margin: 0 10px 0 0;
+  margin-right: 5px;
 }
 
 #workspaces {
@@ -58,6 +66,7 @@ button {
 #workspaces button.active {
     color: white;
     background: @primary;
+    box-shadow: unset;
 }
 #workspaces button.empty:not(.active) {
   color: @primary;
@@ -66,7 +75,7 @@ button {
     background-color: @red;
 }
 
-#custom-spotify {
+#custom-media {
   font-family: sans-serif;
 }
 
@@ -110,15 +119,16 @@ label:disabled {
   margin: 0 -10px 0 0;
 }
 
-#battery,
+/* right aligned modules */
+#custom-battery,
 #backlight,
 #pulseaudio,
-#custom-spotify {
+#custom-media {
   padding: 0 35px 0 15px;
   background: @bg;
   border-radius: 20px 0 0 20px;
   padding-right: 5px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 #custom-icon-left {
@@ -136,14 +146,7 @@ label:disabled {
   background: @bg;
 }
 
-#custom-spotify-icon,
-#custom-pulseaudio-icon,
-#custom-network-icon,
-#custom-cpu-icon,
-#custom-memory-icon,
-#custom-temperature-icon,
-#custom-backlight-icon,
-#custom-battery-icon {
+.icon {
   background: @primary;
   font-size: 1.75em;
   padding-right: 15px;
@@ -151,4 +154,31 @@ label:disabled {
   margin: 0 0 0 0px;
   box-shadow: -15px 0 0 0 @bg;
   box-shadow: unset;
+}
+
+#custom-audio-headset,
+#custom-audio-integrated,
+#custom-audio-hdmi {
+  background: @bg;
+  font-size: 1.75em;
+  padding-right: unset;
+  padding-right: 5px;
+}
+
+.active {
+  color: @active;
+}
+.inactive {
+  color: @inactive;
+}
+
+#custom-left {
+  background: @bg;
+  border-radius: 20px 0 0 20px;
+  padding-left: 20px;
+}
+#custom-right {
+  background: @bg;
+  border-radius: 0 20px 20px 0;
+  padding-left: 20px;
 }

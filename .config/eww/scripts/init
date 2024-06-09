@@ -1,13 +1,13 @@
 #!/bin/bash
 mkdir /tmp/eww
-mkdir /tmp/eww/clipboard
-mkdir /tmp/eww/media
-touch /tmp/eww/media/sock
+# mkdir /tmp/eww/clipboard
+# mkdir /tmp/eww/media
+# touch /tmp/eww/media/sock
 touch /tmp/eww/volume
 touch /tmp/eww/brightness
-($HOME/.config/eww/scripts/clipboard watch > /tmp/eww/clipboard/yuck) &
+# ($HOME/.config/eww/scripts/clipboard watch > /tmp/eww/clipboard/yuck) &
 eww daemon
-pkill -f "python $HOME/.config/eww/scripts/media"
+# pkill -f "python $HOME/.config/eww/scripts/media"
 $HOME/.config/eww/scripts/mediaserver &
-eww open-many bar corner_tl corner_tr corner_bl corner_br
+eww open-many corner_tl corner_tr corner_bl corner_br
 (sleep 10 && eww update volume="$($HOME/.config/eww/scripts/volume get)") &
