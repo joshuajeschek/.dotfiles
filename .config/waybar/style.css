@@ -21,6 +21,7 @@ button {
 }
 
 /* single modules */
+#custom-idasen,
 #workspaces,
 #tray,
 #window,
@@ -44,6 +45,8 @@ button {
 }
 
 /* left aligned modules */
+#custom-idasen,
+#privacy,
 #workspaces,
 #window {
   margin-right: 5px;
@@ -73,6 +76,10 @@ button {
 }
 #workspaces button.urgent {
     background-color: @red;
+}
+
+#custom-idasen {
+  font-size: 1.75em;
 }
 
 #custom-media {
