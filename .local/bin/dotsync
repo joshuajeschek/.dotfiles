@@ -1,5 +1,5 @@
 #!/bin/bash
-CWD=$(pwd)
+cd $HOME
 SUBMODULES=$(echo $(dotbare submodule) | tr -s ' ' | cut -d' ' -f2)
 DT=$(date '+%d/%m/%Y %H:%M:%S')
 for SUBMODULE in $SUBMODULES
@@ -9,7 +9,7 @@ do
     git add .
     git commit -m "sync ($DT)"
     git push
-    cd $CWD
+    cd $HOME
 done
 echo ---dotbare---
 dotbare add -u
