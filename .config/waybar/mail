@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# shorthand for the mail adress
+source $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/$2.env
+
+count() {
+  count=$(find $HOME/.local/share/mail/$ADRESS/$1/new -type f | wc -l)
+  if [ "$count" -eq 0 ]; then
+    echo ''
+  else
+    echo $count
+  fi
+}
+
+case $1 in
+  count)
+    count $3
+    ;;
+  *)
+    echo "Usage: $0 {count} <shorthand> <mailbox>"
+    exit 1
+    ;;
+esac

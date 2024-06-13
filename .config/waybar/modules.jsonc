@@ -1,0 +1,81 @@
+{
+  "privacy": {
+    "icon-size": 16
+  },
+  "hyprland/workspaces": {
+    "sort-by-number": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    "on-click": "activate",
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5]
+    },
+    "format-icons": {
+      "1": "{",
+      "2": "(",
+      "3": "X",
+      "4": "}",
+      "5": ")",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "0",
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "clock": {
+    "format-alt": "{:%Y-%m-%d}",
+    "format": "{:%H:%M:%S}",
+    "interval": 1
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{percent}%",
+    "format-icons": ["", "", "", "", "", "", "", "", ""]
+  },
+  "battery": {
+    "bat": "BAT0",
+    "states": {
+      // "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}%",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    // "format-good": "", // An empty format will hide the module
+    // "format-full": "",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%)",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}%",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol"
+ }
+}

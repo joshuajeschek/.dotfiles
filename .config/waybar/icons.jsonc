@@ -1,0 +1,28 @@
+{
+  "custom/battery-icon#icon": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/battery icon",
+    "interval": 60
+  },
+  "custom/icon-left#battery": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/battery show",
+    "interval": 60
+  },
+  "custom/media-icon#icon": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/media icon"
+  },
+  "custom/icon-left#media": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/media show"
+  },
+  "custom/pulseaudio-icon#icon": {
+    "format": "",
+    "on-click": ""
+  },
+  "custom/backlight-icon#icon": {
+    "format": "󰃠",
+    "on-click": ""
+  }
+}

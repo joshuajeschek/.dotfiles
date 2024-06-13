@@ -1,0 +1,7 @@
+#!/bin/bash
+
+icon() {
+  RAW=`solaar show "PRO X Wireless Gaming Headset" | grep Battery -m 1 | tr -s ' '`
+  CAP=$(echo $raw | perl -nle 'm/([0-9]+)%/; print $1')
+  STA=$(echo $raw | perl -nle 'm/([\S]+)\.$/; print $1')
+}

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+declare -A displays
+displays['C34']='C34J79x'
+display=${displays[$2]}
+touch /tmp/brightness_$display
+
+_append() {
+  brightness=$(ddcutil --terse -l $display getvcp 10 | awk '{if ($4 ~ /^[0-9]+$/) print $4; else print ""}')
+  if [ -z "$brightness" ]; then
+    brightness=$(tail -n 1 /tmp/brightness_c34)
+  fi
+  echo $brightness >> /tmp/brightness_$display
+}
+
+get() {
+  echo '42' >> /tmp/brightness_$display
+  _append
+  tail -f /tmp/brightness_$display
+}
+
+
+set() {
+  echo $display
+  ddcutil --noverify -l $display setvcp 10 $1 $2
+  _append
+}
+
+case $1 in
+  get)
+    get
+    ;;
+  set)
+    set $3 $4
+    ;;
+  *)
+    echo "Usage: $0 {get|set} <display> [value|operator] [value]"
+    exit 1
+    ;;
+esac

@@ -1,5 +1,6 @@
 # vim: filetype=neomuttrc
 # source after config by mutt-wizard is executed
+# set edit_headers=yes
 set query_command = "khard email --parsable --search-in-source-files %s"
 # set sort          = 'reverse-threads'
 # set sort_aux      = 'date-received'

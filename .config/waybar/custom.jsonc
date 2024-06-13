@@ -1,0 +1,84 @@
+{
+  "custom/media": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/media title",
+    "on-click": "$HOME/.config/waybar/media play-pause"
+  },
+  "custom/battery": {
+    "format": "{}%",
+    "exec": "$HOME/.config/waybar/battery capacity",
+    "interval": 60
+  },
+  "custom/audio-headset": {
+    "format": "{icon}",
+    "return-type": "json",
+    "format-icons": "󰋋",
+    "tooltip-format": "Headset",
+    "exec": "$HOME/.config/waybar/audio active pro_x",
+    "on-click": "$HOME/.config/waybar/audio set pro_x"
+    // "format-icons": {
+    //   "true": "󰋋",
+    //   "false": "󰟎"
+    // },
+  },
+  "custom/audio-hdmi": {
+    "format": "{icon}",
+    "return-type": "json",
+    "format-icons":"󰽟",
+    "tooltip-format": "Monitor Speakers",
+    "exec": "$HOME/.config/waybar/audio active hdmi",
+    "on-click": "$HOME/.config/waybar/audio set hdmi"
+    // "format-icons": {
+    //   "true": "󰽟",
+    //   "false": "󰽠"
+    // },
+  },
+  "custom/audio-integrated": {
+    "format": "{icon}",
+    "return-type": "json",
+    "format-icons": "󰌢",
+    "tooltip-format": "Integrated Speakers",
+    "exec": "$HOME/.config/waybar/audio active integrated",
+    "on-click": "$HOME/.config/waybar/audio set integrated"
+    // "format-icons": {
+    //   "true": "󰌢",
+    //   "false": "󰛧"
+    // },
+  },
+  "custom/idasen": {
+    "format": "{}",
+    "on-click": "curl -X POST http://192.168.178.69:8123/api/webhook/-iEw_PiBC1f3dE3MTcOo6Xqle",
+    "exec": "curl http://192.168.178.69:8123/api/ > /dev/null 2>&1 && echo '󱈹' || echo ''",
+    "interval": "60"
+  },
+  "custom/shutdown": {
+    "format": "",
+    "tooltip-format": "Shutdown",
+    "on-click": "shutdown -h now"
+  },
+  "custom/reboot": {
+    "format": "",
+    "tooltip-format": "Reboot",
+    "on-click": "reboot"
+  },
+  "custom/brightness#c34": {
+    "format": "{}",
+    "tooltip-format": "C34J79x Brightness",
+    "exec": "$HOME/.config/waybar/brightness get C34",
+    "on-scroll-up": "$HOME/.config/waybar/brightness set C34 + 10",
+    "on-scroll-down": "$HOME/.config/waybar/brightness set C34 - 10"
+    // "interval": 1
+  }
+  // "custom/brightness": {
+  //   "format": "{icon} {percentage}%",
+  //   "format-icons": ["\uDB80\uDCDE", "\uDB80\uDCDF", "\uDB80\uDCE0"],
+  //   "return-type": "json",
+  //   "exec": "ddcutil --bus 7 getvcp 10 | grep -oP 'current.*?=\\s*\\K[0-9]+' | { read x; echo '{\"percentage\":'${x}'}'; }",
+  //   "on-scroll-up": "ddcutil --noverify --bus 7 setvcp 10 + 10",
+  //   "on-scroll-down": "ddcutil --noverify --bus 7 setvcp 10 - 10",
+  //   "on-click": "ddcutil --noverify --bus 7 setvcp 10 0",
+  //   "on-click-right": "ddcutil --noverify --bus 7 setvcp 10 100",
+  //   "interval": 1,
+  //   "tooltip": false
+  // }
+}

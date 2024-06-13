@@ -1,0 +1,64 @@
+{
+  "include": [
+    "$HOME/.config/waybar/modules.jsonc",
+    "$HOME/.config/waybar/custom.jsonc",
+    "$HOME/.config/waybar/icons.jsonc",
+    "$HOME/.config/waybar/static.jsonc"
+  ],
+  "modules-left": [
+    "hyprland/workspaces",
+    "custom/idasen",
+    "privacy"
+  ],
+  "modules-center": [
+    "custom/left",
+    "group/system",
+    "custom/right"
+  ],
+  "modules-right": [
+    "custom/media",
+    "custom/icon-left#media",
+    "custom/media-icon#icon",
+    "group/audio",
+    "custom/icon-left",
+    "custom/pulseaudio-icon#icon",
+    "backlight",
+    "custom/icon-left",
+    "custom/backlight-icon#icon",
+    // "custom/brightness#c34",
+    "custom/battery",
+    "custom/icon-left#battery",
+    "custom/battery-icon#icon"
+  ],
+  "group/system": {
+    "orientation": "inherit",
+    "modules": [
+      "clock",
+      "custom/shutdown",
+      "custom/reboot"
+    ],
+    "drawer": {
+      "transition-duration": 500
+    }
+  },
+  "group/audio": {
+    "orientation": "inherit",
+    "modules": [
+      "pulseaudio",
+      "custom/audio-headset",
+      "custom/audio-hdmi",
+      "custom/audio-integrated"
+    ],
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "audio-child"
+    }
+  },
+  "reload_style_on_change": true,
+  "exclusive": true,
+  "layer": "top",
+  "height": 40,
+  "margin-left": 10,
+  "margin-right": 10,
+  "margin-top": 10
+}

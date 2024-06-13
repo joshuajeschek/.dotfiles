@@ -1,0 +1,51 @@
+#!/bin/bash
+
+icon() {
+  playerctl metadata --player=spotify,firefox -F --format '{{playerName}}' | while read player
+  do
+    if [[ "$player" == "spotify" ]]; then
+      echo ""
+    elif [[ "$player" == "firefox" ]]; then
+      echo "󰈹"
+    else
+      echo ""
+    fi
+  done
+}
+
+title() {
+  playerctl metadata --player=spotify,firefox -F --format '{{artist}} {{emoji(status)}} {{title}}'
+}
+
+play-pause() {
+  playerctl play-pause --player=spotify,firefox
+}
+
+show() {
+  playerctl status --player=spotify,firefox -F | while read status
+  do
+    if [[ "$status" == "" ]]; then
+      echo ""
+    else
+      echo "​"
+    fi
+  done
+}
+
+case "$1" in
+  icon)
+    icon
+    ;;
+  title)
+    title
+    ;;
+  play-pause)
+    play-pause
+    ;;
+  show)
+    show
+    ;;
+  *)
+    echo "Usage: $0 {icon|title|play-pause|show}" >&2
+    ;;
+esac
