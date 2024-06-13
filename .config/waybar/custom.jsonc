@@ -61,6 +61,12 @@
     "tooltip-format": "Reboot",
     "on-click": "reboot"
   },
+  "custom/mail": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/mail count-all",
+    "return-type": "json",
+    "interval": 60
+  },
   "custom/brightness#c34": {
     "format": "{}",
     "tooltip-format": "C34J79x Brightness",

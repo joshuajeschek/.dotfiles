@@ -127,6 +127,7 @@ label:disabled {
 }
 
 /* right aligned modules */
+#custom-mail,
 #custom-battery,
 #backlight,
 #pulseaudio,
@@ -146,6 +147,7 @@ label:disabled {
 }
 
 /* all custom-icon-left parents */
+.modules-right > *:nth-child(14),
 .modules-right > *:nth-child(11),
 .modules-right > *:nth-child(8),
 .modules-right > *:nth-child(5),

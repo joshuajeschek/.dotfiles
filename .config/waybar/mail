@@ -1,23 +1,61 @@
 #!/bin/bash
 
-# shorthand for the mail adress
-source $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/$2.env
 
 count() {
-  count=$(find $HOME/.local/share/mail/$ADRESS/$1/new -type f | wc -l)
+  source $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )/$1.env
+  count=$(find $HOME/.local/share/mail/$ADRESS/$2/new -type f | wc -l)
   if [ "$count" -eq 0 ]; then
     echo ''
   else
-    echo $count
+    echo "$3 $count"
+  fi
+}
+
+count-all() {
+  s4dinbox=$(count s4d INBOX '')
+  s4dgitlab=$(count s4d gitlab '')
+  personalinbox=$(count personal INBOX '')
+  parts=()
+  [[ -n $s4dinbox ]] && parts+=("$s4dinbox")
+  [[ -n $s4dgitlab ]] && parts+=("$s4dgitlab")
+  [[ -n $personalinbox ]] && parts+=("$personalinbox")
+  text=$(IFS=" "; echo "${parts[*]}")
+  jq -n --unbuffered --compact-output \
+    --arg text "$text" \
+    '{text: $text}'
+}
+
+show() {
+  if [ -z "$(count-all)" ]; then
+    echo ''
+  else
+    echo '​'
+  fi
+}
+
+icon() {
+  if [ -z "$(count-all)" ]; then
+    echo ''
+  else
+    echo '󰇮'
   fi
 }
 
 case $1 in
   count)
-    count $3
+    count $2 $3 $4
+    ;;
+  count-all)
+    count-all
+    ;;
+  show)
+    show
+    ;;
+  icon)
+    icon
     ;;
   *)
-    echo "Usage: $0 {count} <shorthand> <mailbox>"
+    echo "Usage: $0 {count|count-all|show} [shorthand] [mailbox] [icon]"
     exit 1
     ;;
 esac

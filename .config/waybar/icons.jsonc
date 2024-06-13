@@ -17,6 +17,14 @@
     "format": "{}",
     "exec": "$HOME/.config/waybar/media show"
   },
+  "custom/mail-icon#icon": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/mail icon"
+  },
+  "custom/icon-left#mail": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/mail show"
+  },
   "custom/pulseaudio-icon#icon": {
     "format": "",
     "on-click": ""
