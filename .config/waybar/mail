@@ -15,30 +15,35 @@ count-all() {
   s4dinbox=$(count s4d INBOX '')
   s4dgitlab=$(count s4d gitlab '')
   personalinbox=$(count personal INBOX '')
+  tuminbox=$(count tum INBOX '󰑴')
   parts=()
   [[ -n $s4dinbox ]] && parts+=("$s4dinbox")
   [[ -n $s4dgitlab ]] && parts+=("$s4dgitlab")
   [[ -n $personalinbox ]] && parts+=("$personalinbox")
+  [[ -n $tuminbox ]] && parts+=("$tuminbox")
   text=$(IFS=" "; echo "${parts[*]}")
   jq -n --unbuffered --compact-output \
     --arg text "$text" \
     '{text: $text}'
+  touch -m $HOME/.config/waybar/style.cs
 }
 
 show() {
-  if [ -z "$(count-all)" ]; then
-    echo ''
-  else
+  if [ -n "$(count-all | jq --raw-output '.text')" ]; then
     echo '​'
+  else
+    echo ''
   fi
+  touch -m $HOME/.config/waybar/style.cs
 }
 
 icon() {
-  if [ -z "$(count-all)" ]; then
-    echo ''
-  else
+  if [ -n "$(count-all | jq --raw-output '.text')" ]; then
     echo '󰇮'
+  else
+    echo ''
   fi
+  touch -m $HOME/.config/waybar/style.cs
 }
 
 case $1 in

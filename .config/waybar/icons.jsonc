@@ -19,11 +19,13 @@
   },
   "custom/mail-icon#icon": {
     "format": "{}",
-    "exec": "$HOME/.config/waybar/mail icon"
+    "exec": "$HOME/.config/waybar/mail icon",
+    "interval": 60
   },
   "custom/icon-left#mail": {
     "format": "{}",
-    "exec": "$HOME/.config/waybar/mail show"
+    "exec": "$HOME/.config/waybar/mail show",
+    "interval": 60
   },
   "custom/pulseaudio-icon#icon": {
     "format": "",
