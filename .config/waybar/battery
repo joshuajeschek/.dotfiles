@@ -9,6 +9,8 @@ icon() {
   if [ $STA = 'Full' ]; then
     # ICO='󰂅'
     ICO=''
+  elif (( CAP == 100 )); then
+    [[ $charging ]] && ICO='󰂅' || ICO='󰁹'
   elif (( CAP >= 90 )); then
     [[ $charging ]] && ICO='󰂋' || ICO='󰂂'
   elif (( CAP >= 80 )); then

@@ -64,3 +64,5 @@ case $1 in
     exit 1
     ;;
 esac
+
+touch -m $HOME/.config/waybar/style.css
