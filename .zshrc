@@ -52,6 +52,7 @@ alias hg='history | grep'
 alias sb='sudo ddcutil -d 1 setvcp 10'
 alias SHUTDOWN='shutdown -h now'
 alias timesync='sudo ntpd -qg && sudo hwclock --systohc'
+alias remake='make clean && make'
 
 hash -d Projects=~/Projects
 hash -d Documents=/media/josh/main/Documents
