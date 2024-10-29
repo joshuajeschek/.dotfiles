@@ -1,0 +1,24 @@
+#!/bin/bash
+
+dir="$HOME/Pictures/Screenshots"
+name=$(date +'%Y-%m-%d_%H-%M-%S.png')
+
+area() {
+grimblast --notify save area $dir/$name
+}
+
+window() {
+grimblast --notify save active $dir/$name
+}
+
+screen() {
+grimblast --notify save screen $dir/$name
+}
+
+case "$1" in
+  area) area;;
+  window) window;;
+  screen) screen;;
+esac
+
+cat $dir/$name | wl-copy
