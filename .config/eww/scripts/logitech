@@ -1,0 +1,11 @@
+#!/bin/bash
+SECONDS=0
+while true; do
+  echo $SECONDS | tr '\n' ':'
+  raw=`solaar show "PRO X Wireless Gaming Headset" | grep Battery -m 1 | tr -s ' '`
+  mV=$(echo $raw | perl -nle 'm/([0-9]+)mV/; print $1')
+  percentage=$(echo $raw | perl -nle 'm/([0-9]+)%/; print $1')
+  state=$(echo $raw | perl -nle 'm/([\S]+)\.$/; print $1')
+  echo "{\"mV\": $mV, \"percentage\": $percentage, \"state\": \"$state\"}"
+  sleep 3
+done

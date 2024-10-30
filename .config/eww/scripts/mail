@@ -1,0 +1,9 @@
+#!/bin/sh
+for account in ~/.local/share/mail/*; do
+  if [ -d "$account/INBOX/new" ]; then
+    new_mails=$(find "$account/INBOX/new" -type f | wc -l)
+    if [ "$new_mails" -gt 0 ]; then
+      echo "$(basename "$account"): $new_mails"
+    fi
+  fi
+done
